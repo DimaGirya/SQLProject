@@ -1,7 +1,9 @@
-package dima.liza.mobile.shenkar.com.sqlproject;
+package dima.liza.mobile.shenkar.com.sqlproject.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import dima.liza.mobile.shenkar.com.sqlproject.R;
 
 public class MainActivity extends AppCompatActivity {
 
