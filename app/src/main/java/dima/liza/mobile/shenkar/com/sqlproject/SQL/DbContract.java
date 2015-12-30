@@ -75,7 +75,7 @@ public class DbContract {
     public  static final class GradeEntry implements BaseColumns {
         public static final String TABLE_NAME = "Grades";
         public static final String  COLUMN_STUDENT_ID = "StudentId";
-         public static final String  COLUMN_LECTURE_ID = "LectureId";
+         public static final String  COLUMN_COURSE_ID = "CourseId";
         public static final String  COLUMN_GRADE = "Grade";
     }
 }
