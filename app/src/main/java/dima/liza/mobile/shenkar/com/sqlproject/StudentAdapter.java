@@ -1,10 +1,12 @@
 package dima.liza.mobile.shenkar.com.sqlproject;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -40,8 +42,10 @@ public class StudentAdapter extends BaseAdapter {
     Student getStudent(int position) {
         return ((Student) getItem(position));
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        /*
         View view = convertView;
         if (view == null) {
             view = lInflater.inflate(R.layout.students_list, parent, false);
@@ -56,7 +60,32 @@ public class StudentAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.textViewDateOfBirthStudent)).setText(student.getDateOfBirth());
 
         return view;
+        */
+        ViewRowStudent studentToView;
+        if(convertView==null){
+            convertView = LayoutInflater.from(ctx).inflate(R.layout.students_list, null);
+            TextView studentId = (TextView)convertView.findViewById(R.id.textViewStudentID);
+            TextView firstName = (TextView)convertView.findViewById(R.id.textViewFirstNameStudent);
+            TextView lastName = (TextView)convertView.findViewById(R.id.textViewLastNameStudent);
+            TextView address = (TextView)convertView.findViewById(R.id.textViewAddressStudent);
+            TextView dateOfBirth = (TextView)convertView.findViewById(R.id.textViewDateOfBirthStudent);
+            studentToView = new ViewRowStudent(studentId,firstName,lastName,address,dateOfBirth);
+            convertView.setTag(studentToView);
+        }
+        else
+        {
+            studentToView = (ViewRowStudent) convertView.getTag();
+        }
+        int id = students.get(position).getStudentId();
+        String idStr = Integer.toString(id);
+        studentToView.studentId.setText(idStr); //crush!!!!
+        studentToView.firstName.setText(students.get(position).getFirstName());
+        studentToView.lastName.setText(students.get(position).getLastName());
+        studentToView.address.setText(students.get(position).getAddress());
+        studentToView.dateOfBirth.setText(students.get(position).getDateOfBirth());
+        return convertView;
     }
+
 }
 /*
  private int studentId;

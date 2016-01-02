@@ -1,5 +1,7 @@
 package dima.liza.mobile.shenkar.com.sqlproject;
 
+import android.widget.TextView;
+
 /**
  * Created by Girya on 12/28/2015.
  */
