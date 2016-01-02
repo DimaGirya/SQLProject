@@ -59,8 +59,9 @@ public class DbContract {
         public static final String  TABLE_NAME = "Courses";
         public static final String  COLUMN_COURSE_ID = "CourseId";
         public static final String  COLUMN_COURSE_NAME = "CourseName";
-        public static final String  COLUMN_SEMESTER = "Semester";
-        public static final String  COLUMN_LECTURE_ID = "LectureId";
+        public static final String  COLUMN_SEMESTER = "Semester"; //Semester
+        public static final String  COLUMN_LECTURE_ID = "LecturerId";
+        public static final String  COLUMN_YEAR = "Year" ;
     }
 
 

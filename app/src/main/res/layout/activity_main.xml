@@ -10,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Get student list"
-        android:id="@+id/bGetStudentsList"
+        android:id="@+id/buttonGetStudentsList"
+        android:onClick="onClickButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -18,16 +19,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClickButton"
         android:text="GET COURSES LIST"
-        android:id="@+id/gCoursesList"
+        android:id="@+id/buttonGetCoursesList"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClickButton"
         android:text="GET LECTURES LIST"
-        android:id="@+id/gLecturesList"
+        android:id="@+id/buttonGetLecturesList"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -35,133 +38,144 @@
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
+        android:onClick="onClickButton"
         android:layout_height="wrap_content"
         android:text="Add student"
-        android:id="@+id/button"
+        android:id="@+id/buttonAddStudent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/button2"
-        android:layout_alignEnd="@+id/button2" />
+        android:layout_alignRight="@+id/buttonRemoveStudent"
+        android:layout_alignEnd="@+id/buttonRemoveStudent" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="REMOVE STUDNET"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button"
-        android:layout_alignRight="@+id/bGetStudentsList"
-        android:layout_alignEnd="@+id/bGetStudentsList" />
+        android:onClick="onClickButton"
+        android:id="@+id/buttonRemoveStudent"
+        android:layout_below="@+id/buttonAddStudent"
+        android:layout_alignRight="@+id/buttonGetStudentsList"
+        android:layout_alignEnd="@+id/buttonGetStudentsList" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="EDIT STUDENT"
-        android:id="@+id/button3"
-        android:layout_below="@+id/button2"
+        android:onClick="onClickButton"
+        android:id="@+id/buttonEditStudent"
+        android:layout_below="@+id/buttonRemoveStudent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/button2"
-        android:layout_alignEnd="@+id/button2" />
+        android:layout_alignRight="@+id/buttonRemoveStudent"
+        android:layout_alignEnd="@+id/buttonRemoveStudent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickButton"
+        android:text="Add grade"
+        android:id="@+id/buttonAddGrade"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/buttonRemoveGrade"
+        android:layout_alignStart="@+id/buttonRemoveGrade"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickButton"
+        android:text="REMOVE GRADE"
+        android:id="@+id/buttonRemoveGrade"
+        android:layout_alignBottom="@+id/buttonRemoveStudent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickButton"
+        android:text="EDIT GRADE"
+        android:id="@+id/buttonEditGrade"
+        android:layout_alignBottom="@+id/buttonEditStudent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/buttonRemoveGrade"
+        android:layout_alignStart="@+id/buttonRemoveGrade" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickButton"
+        android:text="ADD LECTURE"
+        android:id="@+id/buttonAddLecture"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/buttonAddStudent"
+        android:layout_alignRight="@+id/buttonRemoveLecture"
+        android:layout_alignEnd="@+id/buttonRemoveLecture" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickButton"
+        android:text="REMOVE LECTURE"
+        android:id="@+id/buttonRemoveLecture"
+        android:layout_alignTop="@+id/buttonRemoveStudent"
+        android:layout_toRightOf="@+id/buttonRemoveStudent"
+        android:layout_toEndOf="@+id/buttonRemoveStudent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickButton"
+        android:text="EDIT LECTURE"
+        android:id="@+id/buttonEditLecture"
+        android:layout_alignBottom="@+id/buttonEditStudent"
+        android:layout_alignRight="@+id/buttonAddLecture"
+        android:layout_alignEnd="@+id/buttonAddLecture"
+        android:layout_toRightOf="@+id/buttonEditStudent"
+        android:layout_toEndOf="@+id/buttonEditStudent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickButton"
+        android:text="REMOVE COURSE"
+        android:id="@+id/buttonRemoveCourse"
+        android:layout_below="@+id/buttonAddGrade"
+        android:layout_toLeftOf="@+id/buttonAddGrade"
+        android:layout_toStartOf="@+id/buttonAddGrade" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickButton"
+        android:text="EDIT COURSE"
+        android:id="@+id/buttonEditCourse"
+        android:layout_below="@+id/buttonRemoveGrade"
+        android:layout_toLeftOf="@+id/buttonEditGrade"
+        android:layout_alignLeft="@+id/buttonRemoveCourse"
+        android:layout_alignStart="@+id/buttonRemoveCourse" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickButton"
+        android:text="ADD COURSE"
+        android:id="@+id/buttonAddCourse"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/buttonAddGrade"
+        android:layout_alignLeft="@+id/buttonRemoveCourse"
+        android:layout_alignStart="@+id/buttonRemoveCourse" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_below="@+id/button3"
-        android:layout_alignRight="@+id/gLecturesList"
-        android:layout_alignEnd="@+id/gLecturesList"
-        android:layout_above="@+id/bGetStudentsList" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add grade"
-        android:id="@+id/button4"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/button5"
-        android:layout_alignStart="@+id/button5"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REMOVE GRADE"
-        android:id="@+id/button5"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="EDIT GRADE"
-        android:id="@+id/button6"
-        android:layout_alignBottom="@+id/button3"
+        android:layout_below="@+id/buttonEditStudent"
+        android:layout_toStartOf="@+id/buttonGetCoursesList"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/button5"
-        android:layout_alignStart="@+id/button5" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ADD LECTURE"
-        android:id="@+id/button7"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/button"
-        android:layout_alignRight="@+id/button8"
-        android:layout_alignEnd="@+id/button8" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REMOVE LECTURE"
-        android:id="@+id/button8"
-        android:layout_alignTop="@+id/button2"
-        android:layout_toRightOf="@+id/button2"
-        android:layout_toEndOf="@+id/button2" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="EDIT LECTURE"
-        android:id="@+id/button9"
-        android:layout_alignBottom="@+id/button3"
-        android:layout_alignRight="@+id/button7"
-        android:layout_alignEnd="@+id/button7"
-        android:layout_toRightOf="@+id/button3"
-        android:layout_toEndOf="@+id/button3" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REMOVE COURSE"
-        android:id="@+id/button11"
-        android:layout_above="@+id/button12"
-        android:layout_toRightOf="@+id/button7"
-        android:layout_toLeftOf="@+id/button5"
-        android:layout_toStartOf="@+id/button5" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="EDIT COURSE"
-        android:id="@+id/button12"
-        android:layout_above="@+id/listView"
-        android:layout_alignLeft="@+id/button11"
-        android:layout_alignStart="@+id/button11"
-        android:layout_toLeftOf="@+id/button6"
-        android:layout_toStartOf="@+id/button6" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ADD COURSE"
-        android:id="@+id/button13"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/button4"
-        android:layout_alignLeft="@+id/button11"
-        android:layout_alignStart="@+id/button11" />
+        android:layout_above="@+id/buttonGetStudentsList" />
 </RelativeLayout>

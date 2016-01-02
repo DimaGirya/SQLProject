@@ -42,7 +42,7 @@ public class DBHelper extends SQLiteOpenHelper {
             final String SQL_CREATE_COURSE_TABLE = "CREATE TABLE "
                     + DbContract.CourseEntry.TABLE_NAME + " (" + DbContract.CourseEntry.COLUMN_COURSE_ID
                     + " INTEGER PRIMARY KEY," + DbContract.CourseEntry.COLUMN_COURSE_NAME + "," + DbContract.CourseEntry.COLUMN_LECTURE_ID
-                    + "," + DbContract.CourseEntry.COLUMN_SEMESTER
+                    + "," + DbContract.CourseEntry.COLUMN_SEMESTER + "," + DbContract.CourseEntry.COLUMN_YEAR
                     + " TEXT NOT NULL  UNIQUE ON CONFLICT REPLACE)";
 
             final String SQL_CREATE_GRADES_TABLE = "CREATE TABLE "
@@ -88,10 +88,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         String defaultDataLectures[] = {
-                "INSERT INTO lecturers(LectureId, LastName, FirstName, Address) VALUES ('1001','Yigal','Hoffner','bialik ramat-gan')",
-                "INSERT INTO lecturers(LectureId, LastName, FirstName, Address) VALUES  ('1002','Riva','Shalom','Ben-Gurion givataim');",
-                "INSERT INTO lecturers(LectureId, LastName, FirstName, Address) VALUES ('1003','Marselo','Shichman','sokolov Hod-HasSharon')",
-                "INSERT INTO lecturers(LectureId, LastName, FirstName, Address) VALUES ('1004','Yehiel','Kimhi','moria Haifa')"
+                "INSERT INTO Lectures(LectureId, LastName, FirstName, Address) VALUES ('1001','Yigal','Hoffner','bialik ramat-gan')",
+                "INSERT INTO Lectures(LectureId, LastName, FirstName, Address) VALUES  ('1002','Riva','Shalom','Ben-Gurion givataim');",
+                "INSERT INTO Lectures(LectureId, LastName, FirstName, Address) VALUES ('1003','Marselo','Shichman','sokolov Hod-HasSharon')",
+                "INSERT INTO Lectures(LectureId, LastName, FirstName, Address) VALUES ('1004','Yehiel','Kimhi','moria Haifa')"
         };
         for (int i = 0; i < defaultDataLectures.length; i++) {
             db.execSQL(defaultDataLectures[i]);
@@ -106,6 +106,7 @@ public class DBHelper extends SQLiteOpenHelper {
         for (int i = 0; i < defaultDataCourses.length; i++) {
             db.execSQL(defaultDataCourses[i]);
         }
+        /*
         String defaultDataGrades[] = {
                 "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('101','10001','95')",
                 "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('101','10002','90')",
@@ -130,5 +131,6 @@ public class DBHelper extends SQLiteOpenHelper {
         for (int i = 0; i < defaultDataGrades.length; i++) {
             db.execSQL(defaultDataGrades[i]);
         }
+        */
     }
 }
