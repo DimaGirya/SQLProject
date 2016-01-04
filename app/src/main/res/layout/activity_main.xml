@@ -201,18 +201,18 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/editTextStudentIdMain"
         android:hint="Student ID"
         android:layout_above="@+id/buttonTop3Students"
         android:layout_alignLeft="@+id/buttonBottom3Students"
         android:layout_alignStart="@+id/buttonBottom3Students"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2" />
+        android:layout_alignRight="@+id/editTextCourseIdMain"
+        android:layout_alignEnd="@+id/editTextCourseIdMain" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:id="@+id/editTextCourseIdMain"
         android:hint="Course ID"
         android:layout_alignBottom="@+id/buttonBottom3Students"
         android:layout_toRightOf="@+id/buttonBottom3Students"

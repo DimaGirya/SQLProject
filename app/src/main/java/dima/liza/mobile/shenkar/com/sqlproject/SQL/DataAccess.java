@@ -1,5 +1,6 @@
 package dima.liza.mobile.shenkar.com.sqlproject.SQL;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -169,6 +170,27 @@ public class DataAccess implements  iDataAccess {
 
     @Override
     public boolean addStudent(Student student) {
+        ContentValues content = new ContentValues();
+        content.put(DbContract.StudentEntry.COLUMN_STUDENT_ID, student.getStudentId());
+        content.put(DbContract.StudentEntry.COLUMN_FIRST_NAME, student.getFirstName());
+        content.put(DbContract.StudentEntry.COLUMN_LAST_NAME, student.getLastName());
+        content.put(DbContract.StudentEntry.COLUMN_ADDRESS, student.getAddress());
+        content.put(DbContract.StudentEntry.COLUMN_DATE_OF_BIRTH, student.getDateOfBirth());
+        try {
+            database = dbHelper.getReadableDatabase();
+            if(database.insert(DbContract.StudentEntry.TABLE_NAME,null,content)==-1){
+                return false;
+            }
+            else{
+                return true;
+            }
+        } catch (Exception e) {
+            Log.e(TAG,"Exception!",e);
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
         return false;
     }
 
