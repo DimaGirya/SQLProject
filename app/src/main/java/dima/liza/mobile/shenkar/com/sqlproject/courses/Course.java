@@ -1,4 +1,4 @@
-package dima.liza.mobile.shenkar.com.sqlproject;
+package dima.liza.mobile.shenkar.com.sqlproject.courses;
 
 /**
  * Created by Girya on 12/28/2015.

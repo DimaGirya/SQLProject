@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:weightSum="1">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Student Id"
-        android:id="@+id/textViewStudentID"
-        android:layout_weight="0.28" />
+        android:text="Course ID"
+        android:id="@+id/textViewCourseId"
+        android:layout_weight="0.30" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="First Name"
-        android:id="@+id/textViewFirstNameStudent"
-        android:layout_weight="0.19" />
+        android:text="Course Name"
+        android:id="@+id/textViewCourseName"
+        android:layout_weight="0.11" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Last name"
-        android:id="@+id/textViewLastNameStudent"
-        android:layout_weight="0.29" />
+        android:text="Semester"
+        android:id="@+id/textViewCourseSemester"
+        android:layout_weight="0.08" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Date Of Birth"
-        android:id="@+id/textViewDateOfBirthStudent" />
+        android:text="Year"
+        android:id="@+id/textViewCourseYear"
+        android:layout_weight="0.22" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Address"
-        android:id="@+id/textViewAddressStudent"
-        android:layout_weight="0.56" />
+        android:text="Lecture Id"
+        android:id="@+id/textViewCourseLectureId" />
 </LinearLayout>

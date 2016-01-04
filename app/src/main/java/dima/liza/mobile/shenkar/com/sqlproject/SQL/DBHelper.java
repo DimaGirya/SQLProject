@@ -28,27 +28,27 @@ public class DBHelper extends SQLiteOpenHelper {
 
         try {
             final String SQL_CREATE_LECTURE_TABLE = "CREATE TABLE "
-                    + DbContract.LectureEntry.TABLE_NAME + " (" + DbContract.LectureEntry._ID  + " INTEGER PRIMARY KEY," + DbContract.LectureEntry.COLUMN_LECTURE_ID +","
+                    + DbContract.LectureEntry.TABLE_NAME + " (" + DbContract.LectureEntry.COLUMN_LECTURE_ID  + " INTEGER PRIMARY KEY,"
                     + DbContract.LectureEntry.COLUMN_LAST_NAME + "," + DbContract.LectureEntry.COLUMN_FIRST_NAME
                     + "," + DbContract.LectureEntry.COLUMN_ADDRESS
-                    + " TEXT NOT NULL  UNIQUE ON CONFLICT REPLACE)";
+                    + " TEXT NOT NULL)";
 
             final String SQL_CREATE_STUDENT_TABLE = "CREATE TABLE "
-                    + DbContract.StudentEntry.TABLE_NAME + " (" + DbContract.StudentEntry._ID  + " INTEGER PRIMARY KEY," + DbContract.StudentEntry.COLUMN_STUDENT_ID+","
+                    + DbContract.StudentEntry.TABLE_NAME + " (" + DbContract.StudentEntry.COLUMN_STUDENT_ID  + " INTEGER PRIMARY KEY,"
                     + DbContract.StudentEntry.COLUMN_FIRST_NAME + "," + DbContract.StudentEntry.COLUMN_LAST_NAME
                     + "," + DbContract.StudentEntry.COLUMN_ADDRESS + "," + DbContract.StudentEntry.COLUMN_DATE_OF_BIRTH
-                    + " TEXT NOT NULL  UNIQUE ON CONFLICT REPLACE)";
+                    + " TEXT NOT NULL)";
 
             final String SQL_CREATE_COURSE_TABLE = "CREATE TABLE "
-                    + DbContract.CourseEntry.TABLE_NAME + " (" + DbContract.CourseEntry._ID  + " INTEGER PRIMARY KEY," + DbContract.CourseEntry.COLUMN_COURSE_ID + ","
+                    + DbContract.CourseEntry.TABLE_NAME + " (" + DbContract.CourseEntry.COLUMN_COURSE_ID + " INTEGER PRIMARY KEY,"
                     + DbContract.CourseEntry.COLUMN_COURSE_NAME + "," + DbContract.CourseEntry.COLUMN_LECTURE_ID
                     + "," + DbContract.CourseEntry.COLUMN_SEMESTER + "," + DbContract.CourseEntry.COLUMN_YEAR
-                    + " TEXT NOT NULL  UNIQUE ON CONFLICT REPLACE)";
+                    + " TEXT NOT NULL)";
 
             final String SQL_CREATE_GRADES_TABLE = "CREATE TABLE "
-                    + DbContract.GradeEntry.TABLE_NAME + " ("+ DbContract.GradeEntry._ID  + " INTEGER PRIMARY KEY," + DbContract.GradeEntry.COLUMN_COURSE_ID
+                    + DbContract.GradeEntry.TABLE_NAME + " ("+ DbContract.GradeEntry.COLUMN_COURSE_ID  + ","
                     + DbContract.GradeEntry.COLUMN_STUDENT_ID + "," + DbContract.GradeEntry.COLUMN_GRADE
-                    + " TEXT NOT NULL  UNIQUE ON CONFLICT REPLACE)";
+                    + " TEXT NOT NULL)";
 
             db.execSQL(SQL_CREATE_LECTURE_TABLE);
             db.execSQL(SQL_CREATE_STUDENT_TABLE);
@@ -85,6 +85,7 @@ public class DBHelper extends SQLiteOpenHelper {
         };
         for (int i = 0; i < defaultDataStudents.length; i++) {
             db.execSQL(defaultDataStudents[i]);
+            Log.d(TAG,defaultDataStudents[i]);
         }
 
         String defaultDataLectures[] = {
@@ -95,6 +96,7 @@ public class DBHelper extends SQLiteOpenHelper {
         };
         for (int i = 0; i < defaultDataLectures.length; i++) {
             db.execSQL(defaultDataLectures[i]);
+            Log.d(TAG, defaultDataLectures[i]);
         }
 
         String defaultDataCourses[] = {
@@ -105,6 +107,7 @@ public class DBHelper extends SQLiteOpenHelper {
         };
         for (int i = 0; i < defaultDataCourses.length; i++) {
             db.execSQL(defaultDataCourses[i]);
+            Log.d(TAG, defaultDataCourses[i]);
         }
         /*
         String defaultDataGrades[] = {

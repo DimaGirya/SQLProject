@@ -1,20 +1,15 @@
 package dima.liza.mobile.shenkar.com.sqlproject.lectures;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import dima.liza.mobile.shenkar.com.sqlproject.Course;
 import dima.liza.mobile.shenkar.com.sqlproject.R;
-import dima.liza.mobile.shenkar.com.sqlproject.activity.MainActivity;
-import dima.liza.mobile.shenkar.com.sqlproject.students.ViewRowStudent;
 
 /**
  * Created by Girya on 12/31/2015.

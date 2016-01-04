@@ -2,7 +2,7 @@ package dima.liza.mobile.shenkar.com.sqlproject.SQL;
 
 import java.util.List;
 
-import dima.liza.mobile.shenkar.com.sqlproject.Course;
+import dima.liza.mobile.shenkar.com.sqlproject.courses.Course;
 import dima.liza.mobile.shenkar.com.sqlproject.Grade;
 import dima.liza.mobile.shenkar.com.sqlproject.lectures.Lecture;
 import dima.liza.mobile.shenkar.com.sqlproject.students.Student;

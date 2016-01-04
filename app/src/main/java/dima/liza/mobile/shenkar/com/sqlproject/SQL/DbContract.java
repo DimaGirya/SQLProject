@@ -16,7 +16,7 @@ public class DbContract {
         );
     */
 
-    public  static final class LectureEntry implements BaseColumns {
+    public  static final class LectureEntry{
         public static final String TABLE_NAME = "Lectures";
         public static final String  COLUMN_LECTURE_ID = "LectureId";
         public static final String  COLUMN_LAST_NAME = "LastName";
@@ -35,7 +35,7 @@ public class DbContract {
         );
      */
 
-    public  static final class StudentEntry implements BaseColumns {
+    public  static final class StudentEntry{
         public static final String TABLE_NAME = "Students";
         public static final String  COLUMN_STUDENT_ID = "StudentId";
         public static final String  COLUMN_LAST_NAME = "LastName";
@@ -55,7 +55,7 @@ public class DbContract {
     );
      */
 
-     public  static final class CourseEntry implements BaseColumns {
+     public  static final class CourseEntry{
         public static final String  TABLE_NAME = "Courses";
         public static final String  COLUMN_COURSE_ID = "CourseId";
         public static final String  COLUMN_COURSE_NAME = "CourseName";
@@ -73,7 +73,7 @@ public class DbContract {
                     Grade int
             );
 */
-    public  static final class GradeEntry implements BaseColumns {
+    public  static final class GradeEntry {
         public static final String TABLE_NAME = "Grades";
         public static final String  COLUMN_STUDENT_ID = "StudentId";
          public static final String  COLUMN_COURSE_ID = "CourseId";
