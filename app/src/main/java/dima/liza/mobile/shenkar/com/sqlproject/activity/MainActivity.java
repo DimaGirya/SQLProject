@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
             case R.id.buttonAddStudent:{
-                Log.i(TAG,"buttonAddStudent click");
+                Log.i(TAG, "buttonAddStudent click");
                 break;
             }
             case R.id.buttonAddCourse:{
@@ -107,6 +107,18 @@ public class MainActivity extends AppCompatActivity {
             }
             case R.id.buttonEditStudent:{
                 Log.i(TAG,"buttonEditStudent click");
+                break;
+            }
+            case R.id.buttonShowGradesOfStudent:{
+                Log.i(TAG,"buttonShowGradesOfStudent click");
+                break;
+            }
+            case R.id.buttonTop3Students:{
+                Log.i(TAG,"buttonTop3Students click");
+                break;
+            }
+            case R.id.buttonBottom3Students:{
+                Log.i(TAG,"buttonBottom3Students click");
                 break;
             }
             default:{

@@ -169,13 +169,65 @@
         android:layout_alignLeft="@+id/buttonRemoveCourse"
         android:layout_alignStart="@+id/buttonRemoveCourse" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickButton"
+        android:text="Show grades of student"
+        android:id="@+id/buttonShowGradesOfStudent"
+        android:layout_below="@+id/buttonEditStudent"
+        android:layout_alignLeft="@+id/buttonRemoveStudent"
+        android:layout_alignStart="@+id/buttonRemoveStudent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickButton"
+        android:text="Top 3 Student of course"
+        android:id="@+id/buttonTop3Students"
+        android:layout_below="@+id/buttonShowGradesOfStudent"
+        android:layout_toLeftOf="@+id/buttonGetCoursesList"
+        android:layout_toStartOf="@+id/buttonGetCoursesList" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bottom 3 Student of course"
+        android:id="@+id/buttonBottom3Students"
+        android:layout_alignTop="@+id/buttonTop3Students"
+        android:layout_toLeftOf="@+id/buttonEditGrade"
+        android:layout_toStartOf="@+id/buttonEditGrade" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:hint="Student ID"
+        android:layout_above="@+id/buttonTop3Students"
+        android:layout_alignLeft="@+id/buttonBottom3Students"
+        android:layout_alignStart="@+id/buttonBottom3Students"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_alignEnd="@+id/editText2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText2"
+        android:hint="Course ID"
+        android:layout_alignBottom="@+id/buttonBottom3Students"
+        android:layout_toRightOf="@+id/buttonBottom3Students"
+        android:layout_alignRight="@+id/buttonEditGrade"
+        android:layout_alignEnd="@+id/buttonEditGrade" />
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_below="@+id/buttonEditStudent"
-        android:layout_toStartOf="@+id/buttonGetCoursesList"
+        android:layout_below="@+id/buttonBottom3Students"
+        android:layout_toStartOf="@+id/buttonTop3Students"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_above="@+id/buttonGetStudentsList" />
+
+
 </RelativeLayout>
