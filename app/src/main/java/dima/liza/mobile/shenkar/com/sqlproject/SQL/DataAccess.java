@@ -10,8 +10,8 @@ import java.util.List;
 
 import dima.liza.mobile.shenkar.com.sqlproject.Course;
 import dima.liza.mobile.shenkar.com.sqlproject.Grade;
-import dima.liza.mobile.shenkar.com.sqlproject.Lecture;
-import dima.liza.mobile.shenkar.com.sqlproject.Student;
+import dima.liza.mobile.shenkar.com.sqlproject.lectures.Lecture;
+import dima.liza.mobile.shenkar.com.sqlproject.students.Student;
 
 /**
  * Created by Girya on 12/29/2015.
@@ -25,6 +25,8 @@ public class DataAccess implements  iDataAccess {
     private String[] studentColumns = { DbContract.StudentEntry.COLUMN_STUDENT_ID, DbContract.StudentEntry.COLUMN_FIRST_NAME,
             DbContract.StudentEntry.COLUMN_LAST_NAME, DbContract.StudentEntry.COLUMN_ADDRESS,
             DbContract.StudentEntry.COLUMN_DATE_OF_BIRTH};
+    private String[] lectureColumns = { DbContract.LectureEntry.COLUMN_LECTURE_ID, DbContract.LectureEntry.COLUMN_FIRST_NAME,
+            DbContract.LectureEntry.COLUMN_LAST_NAME, DbContract.LectureEntry.COLUMN_ADDRESS};
 
 
     private DataAccess(Context context) {	//private constructor(singleton)
@@ -48,19 +50,19 @@ public class DataAccess implements  iDataAccess {
 
         try {
             database = dbHelper.getReadableDatabase();
-            List<Student> taskList = new ArrayList<Student>();
+            List<Student> studentList = new ArrayList<Student>();
 
             Cursor cursor = database.query(DbContract.StudentEntry.TABLE_NAME, studentColumns, null, null, null, null, null);
 
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                Student task = getStudentFromCursor(cursor);
-                taskList.add(task);
+                Student student = getStudentFromCursor(cursor);
+                studentList.add(student);
                 cursor.moveToNext();
             }
             // java.util.Collections.sort(taskList);
             cursor.close();
-            return taskList;
+            return studentList;
         }
         catch (Exception  e){
             Log.d(TAG, "Error,Exception:",e);
@@ -92,7 +94,42 @@ public class DataAccess implements  iDataAccess {
 
     @Override
     public List<Lecture> getAllLecture() {
-        return null;
+        try {
+            database = dbHelper.getReadableDatabase();
+            List<Lecture> lectureList = new ArrayList<Lecture>();
+
+            Cursor cursor = database.query(DbContract.LectureEntry.TABLE_NAME, lectureColumns, null, null, null, null, null);
+
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Lecture lecture = getLectureFromCursor(cursor);
+                lectureList.add(lecture);
+                cursor.moveToNext();
+            }
+            // java.util.Collections.sort(taskList);
+            cursor.close();
+            return lectureList;
+        }
+        catch (Exception  e){
+            Log.d(TAG, "Error,Exception:",e);
+        }
+        finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+        return null;    //warning
+    }
+
+    private Lecture getLectureFromCursor(Cursor cursor) {
+        //Log.d(TAG,"getTaskFromCursor start");
+        int studentId = cursor.getInt(cursor.getColumnIndex(DbContract.LectureEntry.COLUMN_LECTURE_ID));
+        String firstName = cursor.getString(cursor.getColumnIndex( DbContract.LectureEntry.COLUMN_FIRST_NAME));
+        String lastName = cursor.getString(cursor.getColumnIndex(DbContract.LectureEntry.COLUMN_LAST_NAME));
+        String address = cursor.getString(cursor.getColumnIndex( DbContract.LectureEntry.COLUMN_ADDRESS));
+        Lecture lecture = new Lecture(studentId,firstName,lastName,address);
+        //Log.d(TAG,"getTaskFromCursor end");
+        return lecture;
     }
 
     @Override

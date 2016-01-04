@@ -1,4 +1,4 @@
-package dima.liza.mobile.shenkar.com.sqlproject;
+package dima.liza.mobile.shenkar.com.sqlproject.students;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,16 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import dima.liza.mobile.shenkar.com.sqlproject.R;
 
 /**
  * Created by Girya on 12/31/2015.
  */
 public class StudentAdapter extends BaseAdapter {
+    private static final String TAG = "StudentAdapter";
     Context ctx;
     LayoutInflater lInflater;
     List<Student> students;
@@ -78,7 +79,7 @@ public class StudentAdapter extends BaseAdapter {
         }
         int id = students.get(position).getStudentId();
         String idStr = Integer.toString(id);
-        studentToView.studentId.setText(idStr); //crush!!!!
+        studentToView.studentId.setText(idStr);
         studentToView.firstName.setText(students.get(position).getFirstName());
         studentToView.lastName.setText(students.get(position).getLastName());
         studentToView.address.setText(students.get(position).getAddress());

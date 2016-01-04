@@ -10,8 +10,10 @@ import java.util.List;
 
 import dima.liza.mobile.shenkar.com.sqlproject.R;
 import dima.liza.mobile.shenkar.com.sqlproject.SQL.DataAccess;
-import dima.liza.mobile.shenkar.com.sqlproject.Student;
-import dima.liza.mobile.shenkar.com.sqlproject.StudentAdapter;
+import dima.liza.mobile.shenkar.com.sqlproject.lectures.Lecture;
+import dima.liza.mobile.shenkar.com.sqlproject.lectures.LectureAdapter;
+import dima.liza.mobile.shenkar.com.sqlproject.students.Student;
+import dima.liza.mobile.shenkar.com.sqlproject.students.StudentAdapter;
 
 public class MainActivity extends AppCompatActivity {
     String TAG  = "MainActivity";
@@ -39,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
                 List<Student> students = data.getAllStudents();
                 StudentAdapter studentAdapter = new StudentAdapter(this,students);  //warning!!!!
                 listView.setAdapter(studentAdapter);
+                break;
+            }
+            case R.id.buttonGetLecturesList:{
+                List<Lecture> lectures = data.getAllLecture();
+                LectureAdapter lectureAdapter = new LectureAdapter(this,lectures);  //warning!!!!
+                listView.setAdapter(lectureAdapter);
                 break;
             }
             default:{

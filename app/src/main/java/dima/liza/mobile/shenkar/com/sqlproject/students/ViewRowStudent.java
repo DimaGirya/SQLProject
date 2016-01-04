@@ -1,4 +1,4 @@
-package dima.liza.mobile.shenkar.com.sqlproject;
+package dima.liza.mobile.shenkar.com.sqlproject.students;
 
 import android.widget.TextView;
 
@@ -20,4 +20,5 @@ public class ViewRowStudent {
         this.address = address;
         this.dateOfBirth = dateOfBirth;
     }
+
 }

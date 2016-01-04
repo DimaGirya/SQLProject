@@ -29,14 +29,14 @@ public class DBHelper extends SQLiteOpenHelper {
         try {
             final String SQL_CREATE_LECTURE_TABLE = "CREATE TABLE "
                     + DbContract.LectureEntry.TABLE_NAME + " (" + DbContract.LectureEntry._ID  + " INTEGER PRIMARY KEY," + DbContract.LectureEntry.COLUMN_LECTURE_ID +","
-                    + DbContract.LectureEntry.COLUMN_ADDRESS + "," + DbContract.LectureEntry.COLUMN_FIRST_NAME
-                    + "," + DbContract.LectureEntry.COLUMN_LAST_NAME
+                    + DbContract.LectureEntry.COLUMN_LAST_NAME + "," + DbContract.LectureEntry.COLUMN_FIRST_NAME
+                    + "," + DbContract.LectureEntry.COLUMN_ADDRESS
                     + " TEXT NOT NULL  UNIQUE ON CONFLICT REPLACE)";
 
             final String SQL_CREATE_STUDENT_TABLE = "CREATE TABLE "
                     + DbContract.StudentEntry.TABLE_NAME + " (" + DbContract.StudentEntry._ID  + " INTEGER PRIMARY KEY," + DbContract.StudentEntry.COLUMN_STUDENT_ID+","
-                    + DbContract.StudentEntry.COLUMN_ADDRESS + "," + DbContract.StudentEntry.COLUMN_FIRST_NAME
-                    + "," + DbContract.StudentEntry.COLUMN_LAST_NAME + "," + DbContract.StudentEntry.COLUMN_DATE_OF_BIRTH
+                    + DbContract.StudentEntry.COLUMN_FIRST_NAME + "," + DbContract.StudentEntry.COLUMN_LAST_NAME
+                    + "," + DbContract.StudentEntry.COLUMN_ADDRESS + "," + DbContract.StudentEntry.COLUMN_DATE_OF_BIRTH
                     + " TEXT NOT NULL  UNIQUE ON CONFLICT REPLACE)";
 
             final String SQL_CREATE_COURSE_TABLE = "CREATE TABLE "
