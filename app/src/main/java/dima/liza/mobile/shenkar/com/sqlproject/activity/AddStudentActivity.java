@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import dima.liza.mobile.shenkar.com.sqlproject.R;
+import dima.liza.mobile.shenkar.com.sqlproject.SQL.DataAccess;
 
 public class AddStudentActivity extends AppCompatActivity {
     EditText editTextStudentId;
@@ -16,6 +17,7 @@ public class AddStudentActivity extends AppCompatActivity {
     EditText editTextStudentLastName;
     EditText editTextStudentAddress;
     EditText editTextDateOfBirthday;
+    DataAccess dataAccess;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,7 @@ public class AddStudentActivity extends AppCompatActivity {
     }
 
     public void onClickAddStudent(View view) {
+
         String studentId = editTextStudentId.getText().toString();
         String studentFirstName = editTextStudentFirsName.getText().toString();
         String studentLastName = editTextStudentLastName.getText().toString();
@@ -50,6 +53,11 @@ public class AddStudentActivity extends AppCompatActivity {
             return;
         }  if (studentDateOfBirthday.equals("")) {
             Toast.makeText(this, "You need to input a student date of birthday", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        dataAccess = DataAccess.getInstatnce(this);
+        if(dataAccess.getStudentById(studentId)!=null){
+            Toast.makeText(this, "The date base has a student  with this ID.Additions impossible", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent returnIntent = new Intent();

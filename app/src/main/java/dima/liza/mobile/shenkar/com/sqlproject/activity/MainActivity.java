@@ -40,8 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         dataAccess = DataAccess.getInstatnce(this);
         listView = (ListView) findViewById(R.id.listView);
-        editTextStudentId = (EditText) findViewById(R.id.editTextStudentIdMain);
-        editTextCourseId = (EditText) findViewById(R.id.editTextCourseIdMain);
+        editTextStudentId = (EditText) findViewById(R.id.editTextIdMain);
 
     }
     @Override

@@ -9,9 +9,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import dima.liza.mobile.shenkar.com.sqlproject.R;
+import dima.liza.mobile.shenkar.com.sqlproject.SQL.DataAccess;
 
 public class AddLectureActivity extends AppCompatActivity {
     EditText editTextLectureId,editTextLastName,editTextFirstName,editTexAddress;
+    DataAccess dataAccess;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,11 @@ public class AddLectureActivity extends AppCompatActivity {
         }
         if (lectureAddress.equals("")) {
             Toast.makeText(this, "You need to input a lecture address", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        dataAccess = DataAccess.getInstatnce(this);
+        if(dataAccess.getLectureById(lectureId)!=null){
+            Toast.makeText(this, "The date base has a lectureId  with this ID.Additions impossible", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent returnIntent = new Intent();

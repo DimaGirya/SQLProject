@@ -43,12 +43,12 @@ public class DBHelper extends SQLiteOpenHelper {
                     + DbContract.CourseEntry.TABLE_NAME + " (" + DbContract.CourseEntry.COLUMN_COURSE_ID + " INTEGER PRIMARY KEY,"
                     + DbContract.CourseEntry.COLUMN_COURSE_NAME + "," + DbContract.CourseEntry.COLUMN_LECTURE_ID
                     + "," + DbContract.CourseEntry.COLUMN_SEMESTER + "," + DbContract.CourseEntry.COLUMN_YEAR
-                    + " TEXT NOT NULL)";
+                    + " INTEGER TEXT NOT NULL)";
 
             final String SQL_CREATE_GRADES_TABLE = "CREATE TABLE "
-                    + DbContract.GradeEntry.TABLE_NAME + " ("+ DbContract.GradeEntry.COLUMN_COURSE_ID  + ","
-                    + DbContract.GradeEntry.COLUMN_STUDENT_ID + "," + DbContract.GradeEntry.COLUMN_GRADE
-                    + " TEXT NOT NULL)";
+                    + DbContract.GradeEntry.TABLE_NAME + " ("+ DbContract.GradeEntry.COLUMN_COURSE_ID  + " INTEGER,"
+                    + DbContract.GradeEntry.COLUMN_STUDENT_ID + " INTEGER," + DbContract.GradeEntry.COLUMN_GRADE
+                    + " INTEGER TEXT NOT NULL)";
 
             db.execSQL(SQL_CREATE_LECTURE_TABLE);
             db.execSQL(SQL_CREATE_STUDENT_TABLE);

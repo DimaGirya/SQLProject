@@ -232,7 +232,7 @@ public class DataAccess implements  iDataAccess {
         content.put(DbContract.GradeEntry.COLUMN_GRADE, grade.getGrade());
         try {
             database = dbHelper.getReadableDatabase();
-            if(database.insert(DbContract.LectureEntry.TABLE_NAME,null,content)==-1){
+            if(database.insert(DbContract.GradeEntry.TABLE_NAME,null,content)==-1){
                 return false;
             }
             else{
@@ -352,11 +352,43 @@ public class DataAccess implements  iDataAccess {
             Cursor cursor =  database.rawQuery(sqlSelect,selectionArgs);
             cursor.moveToFirst();
             if(cursor.getCount()!=1){
-                Log.d(TAG, "Error!! more than 1 student with id:"+studentId);
+                Log.d(TAG, "Error!! more than 1 course with id or no such course:"+studentId + " cursor.getCount():"+cursor.getCount());
                 return null;
             }
             Student student = getStudentFromCursor(cursor);
             return student;
+        }
+        catch (Exception  e){
+            Log.d(TAG, "Error,Exception:",e);
+        }
+        finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Lecture getLectureById(String lectureId) {
+        try {
+            database = dbHelper.getReadableDatabase();
+            String sqlSelect = "SELECT " + DbContract.LectureEntry.COLUMN_LECTURE_ID  + ","
+                    + DbContract.LectureEntry.COLUMN_LAST_NAME + "," + DbContract.LectureEntry.COLUMN_FIRST_NAME
+                    + "," + DbContract.LectureEntry.COLUMN_ADDRESS
+                    + " FROM "+ DbContract.LectureEntry.TABLE_NAME
+                    + " WHERE " + DbContract.LectureEntry.COLUMN_LECTURE_ID + "= ?" ;
+            String  selectionArgs[] = new String[1];
+            selectionArgs[0] = lectureId;
+            Log.d(TAG,sqlSelect);
+            Cursor cursor =  database.rawQuery(sqlSelect,selectionArgs);
+            cursor.moveToFirst();
+            if(cursor.getCount()!=1){
+                Log.d(TAG, "Error!! more than 1 course with id or no such course:"+lectureId + " cursor.getCount():"+cursor.getCount());
+                return null;
+            }
+            Lecture lecture = getLectureFromCursor(cursor);
+            return lecture;
         }
         catch (Exception  e){
             Log.d(TAG, "Error,Exception:",e);

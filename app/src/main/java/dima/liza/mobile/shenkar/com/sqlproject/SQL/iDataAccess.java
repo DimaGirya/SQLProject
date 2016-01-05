@@ -31,4 +31,5 @@ public interface iDataAccess {
 
     Course getCourseById(String courseId);
     Student getStudentById(String studentId);
+    Lecture getLectureById(String lectureId);
 }
