@@ -226,6 +226,25 @@ public class DataAccess implements  iDataAccess {
 
     @Override
     public boolean addGrade(Grade grade) {
+        ContentValues content = new ContentValues();
+        content.put(DbContract.GradeEntry.COLUMN_COURSE_ID, grade.getCourseId());
+        content.put(DbContract.GradeEntry.COLUMN_STUDENT_ID, grade.getStudentId());
+        content.put(DbContract.GradeEntry.COLUMN_GRADE, grade.getGrade());
+        try {
+            database = dbHelper.getReadableDatabase();
+            if(database.insert(DbContract.LectureEntry.TABLE_NAME,null,content)==-1){
+                return false;
+            }
+            else{
+                return true;
+            }
+        } catch (Exception e) {
+            Log.e(TAG,"Exception!",e);
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
         return false;
     }
 
@@ -273,6 +292,71 @@ public class DataAccess implements  iDataAccess {
             }
             cursor.close();
             return studentGrades;
+        }
+        catch (Exception  e){
+            Log.d(TAG, "Error,Exception:",e);
+        }
+        finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Course getCourseById(String courseId) {
+        try {
+            database = dbHelper.getReadableDatabase();
+            String sqlSelect = "SELECT " + DbContract.CourseEntry.COLUMN_COURSE_ID + ","
+                    + DbContract.CourseEntry.COLUMN_COURSE_NAME + "," + DbContract.CourseEntry.COLUMN_LECTURE_ID
+                    + "," + DbContract.CourseEntry.COLUMN_SEMESTER + "," + DbContract.CourseEntry.COLUMN_YEAR
+                    + " FROM "+ DbContract.CourseEntry.TABLE_NAME
+                    + " WHERE " + DbContract.CourseEntry.COLUMN_COURSE_ID + "= ?" ;
+            String  selectionArgs[] = new String[1];
+            selectionArgs[0] = courseId;
+            Log.d(TAG,sqlSelect+ selectionArgs[0]);
+            Cursor cursor =  database.rawQuery(sqlSelect,selectionArgs);
+            cursor.moveToFirst();
+            Log.d(TAG," cursor.getCount():"+ cursor.getCount());
+            if(cursor.getCount()!=1){
+                Log.d(TAG, "Error!! more than 1 course with id or no such course:"+courseId + " cursor.getCount():"+cursor.getCount());
+                return null;
+            }
+            Course course = getCurseFromCursor(cursor);
+            return course;
+        }
+        catch (Exception  e){
+            Log.d(TAG, "Error,Exception:",e);
+        }
+        finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Student getStudentById(String studentId) {
+        try {
+            database = dbHelper.getReadableDatabase();
+            String sqlSelect = "SELECT " + DbContract.StudentEntry.COLUMN_STUDENT_ID  + ","
+                    + DbContract.StudentEntry.COLUMN_FIRST_NAME + "," + DbContract.StudentEntry.COLUMN_LAST_NAME
+                    + "," + DbContract.StudentEntry.COLUMN_ADDRESS + "," + DbContract.StudentEntry.COLUMN_DATE_OF_BIRTH
+                    + " FROM "+ DbContract.StudentEntry.TABLE_NAME
+                    + " WHERE " + DbContract.StudentEntry.COLUMN_STUDENT_ID + "= ?" ;
+            String  selectionArgs[] = new String[1];
+            selectionArgs[0] = studentId;
+            Log.d(TAG,sqlSelect);
+            Cursor cursor =  database.rawQuery(sqlSelect,selectionArgs);
+            cursor.moveToFirst();
+            if(cursor.getCount()!=1){
+                Log.d(TAG, "Error!! more than 1 student with id:"+studentId);
+                return null;
+            }
+            Student student = getStudentFromCursor(cursor);
+            return student;
         }
         catch (Exception  e){
             Log.d(TAG, "Error,Exception:",e);

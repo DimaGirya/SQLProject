@@ -27,6 +27,8 @@ public interface iDataAccess {
     boolean removeCourse(Course course);
     boolean removeGrade(Grade grade);
 
-
     List<StudentGrade> getStudentGrades(String studentId);
+
+    Course getCourseById(String courseId);
+    Student getStudentById(String studentId);
 }

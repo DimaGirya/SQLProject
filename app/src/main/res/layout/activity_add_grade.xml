@@ -9,4 +9,40 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="dima.liza.mobile.shenkar.com.sqlproject.activity.AddGradeActivity">
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Student Id"
+        android:id="@+id/editTextAddGradeStudentId"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Course Id"
+        android:id="@+id/editTextAddGradeCourseId"
+        android:layout_below="@+id/editTextAddGradeStudentId"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:hint="Grade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTexdAddGradeGrade"
+        android:layout_below="@+id/editTextAddGradeCourseId"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editTextAddGradeCourseId"
+        android:layout_alignEnd="@+id/editTextAddGradeCourseId" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickButtonAddGrade"
+        android:text="Add Grade"
+        android:id="@+id/buttonAddGrade"
+        android:layout_below="@+id/editTexdAddGradeGrade" />
 </RelativeLayout>

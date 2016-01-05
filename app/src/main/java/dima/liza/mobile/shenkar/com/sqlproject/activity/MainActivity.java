@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import dima.liza.mobile.shenkar.com.sqlproject.Grade;
 import dima.liza.mobile.shenkar.com.sqlproject.R;
 import dima.liza.mobile.shenkar.com.sqlproject.SQL.DataAccess;
 import dima.liza.mobile.shenkar.com.sqlproject.courses.Course;
@@ -84,13 +85,25 @@ public class MainActivity extends AppCompatActivity {
             }
             case REQUEST_ADD_COURSE:{
                 if(resultCode== Activity.RESULT_OK){
-                    //todo
+                     //todo
                 }
                 break;
             }
             case REQUEST_ADD_GRADE:{
                 if(resultCode== Activity.RESULT_OK){
-                    //todo
+                    String stStudentId  = data.getStringExtra("studentId");
+                    int studentId  = Integer.parseInt(stStudentId);
+                    String stCourseId  = data.getStringExtra("courseId");
+                    int courseId  = Integer.parseInt(stCourseId);
+                    String strGrade  = data.getStringExtra("grade");
+                    int grade  = Integer.parseInt(strGrade);
+                    Grade newGrade = new Grade(studentId,courseId,grade);
+                    if(dataAccess.addGrade(newGrade)){
+                        Toast.makeText(this,"Grade add to data base",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(this,"Grade not add to data base,try again",Toast.LENGTH_LONG).show();
+                    }
                 }
                 break;
             }
