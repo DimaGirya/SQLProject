@@ -67,7 +67,18 @@ public class MainActivity extends AppCompatActivity {
             }
             case REQUEST_ADD_LECTURE:{
                 if(resultCode== Activity.RESULT_OK){
-                //todo
+                    String strLectureId  = data.getStringExtra("lectureId");
+                    int lectureId  = Integer.parseInt(strLectureId);
+                    String lectureFirstName =  data.getStringExtra("lectureFirstName");
+                    String lectureLastName =   data.getStringExtra("lectureLastName");
+                    String lectureAddress =  data.getStringExtra("lectureAddress");
+                    Lecture newLecture = new Lecture(lectureId,lectureFirstName,lectureLastName,lectureAddress);
+                    if(dataAccess.addLecture(newLecture)){
+                        Toast.makeText(this,"Lecture add to data base",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(this,"Lecture not add to data base,try again",Toast.LENGTH_LONG).show();
+                    }
                 }
                 break;
             }

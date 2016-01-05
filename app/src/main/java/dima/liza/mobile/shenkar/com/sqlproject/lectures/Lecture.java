@@ -9,7 +9,7 @@ public class Lecture {
     private String firstName;
     private String address;
 
-    public Lecture(int lectureId, String lastName, String address, String firstName) {
+    public Lecture(int lectureId, String firstName, String lastName, String address) {
         this.lectureId = lectureId;
         this.lastName = lastName;
         this.address = address;

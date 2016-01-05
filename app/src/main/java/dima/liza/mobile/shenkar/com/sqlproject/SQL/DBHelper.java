@@ -89,10 +89,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         String defaultDataLectures[] = {
-                "INSERT INTO Lectures(LectureId, LastName, FirstName, Address) VALUES ('1001','Yigal','Hoffner','bialik ramat-gan')",
-                "INSERT INTO Lectures(LectureId, LastName, FirstName, Address) VALUES  ('1002','Riva','Shalom','Ben-Gurion givataim');",
-                "INSERT INTO Lectures(LectureId, LastName, FirstName, Address) VALUES ('1003','Marselo','Shichman','sokolov Hod-HasSharon')",
-                "INSERT INTO Lectures(LectureId, LastName, FirstName, Address) VALUES ('1004','Yehiel','Kimhi','moria Haifa')"
+                "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES ('1001','Yigal','Hoffner','bialik ramat-gan')",
+                "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES  ('1002','Riva','Shalom','Ben-Gurion givataim');",
+                "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES ('1003','Marselo','Shichman','sokolov Hod-HasSharon')",
+                "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES ('1004','Yehiel','Kimhi','moria Haifa')"
         };
         for (int i = 0; i < defaultDataLectures.length; i++) {
             db.execSQL(defaultDataLectures[i]);

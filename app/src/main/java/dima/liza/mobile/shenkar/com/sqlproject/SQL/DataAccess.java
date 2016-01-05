@@ -122,9 +122,8 @@ public class DataAccess implements  iDataAccess {
         String courseName = cursor.getString(cursor.getColumnIndex(DbContract.CourseEntry.COLUMN_COURSE_NAME));
         String courseSemester = cursor.getString(cursor.getColumnIndex( DbContract.CourseEntry.COLUMN_SEMESTER));
         int courseYear =  cursor.getInt(cursor.getColumnIndex(DbContract.CourseEntry.COLUMN_YEAR));
-        int courseCectureId =  cursor.getInt(cursor.getColumnIndex(DbContract.CourseEntry.COLUMN_LECTURE_ID));
-        Course course = new Course(courseId,courseName,courseSemester,courseYear,courseCectureId);
-        return course;
+        int courseLectureId =  cursor.getInt(cursor.getColumnIndex(DbContract.CourseEntry.COLUMN_LECTURE_ID));
+        return new Course(courseId,courseName,courseSemester,courseYear,courseLectureId);
     }
 
     @Override
@@ -197,6 +196,26 @@ public class DataAccess implements  iDataAccess {
 
     @Override
     public boolean addLecture(Lecture lecture) {
+        ContentValues content = new ContentValues();
+        content.put(DbContract.LectureEntry.COLUMN_LECTURE_ID, lecture.getLectureId());
+        content.put(DbContract.LectureEntry.COLUMN_FIRST_NAME, lecture.getFirstName());
+        content.put(DbContract.LectureEntry.COLUMN_LAST_NAME, lecture.getLastName());
+        content.put(DbContract.LectureEntry.COLUMN_ADDRESS,lecture.getAddress());
+        try {
+            database = dbHelper.getReadableDatabase();
+            if(database.insert(DbContract.LectureEntry.TABLE_NAME,null,content)==-1){
+                return false;
+            }
+            else{
+                return true;
+            }
+        } catch (Exception e) {
+            Log.e(TAG,"Exception!",e);
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
         return false;
     }
 

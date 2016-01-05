@@ -9,4 +9,56 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="dima.liza.mobile.shenkar.com.sqlproject.activity.AddLectureActivity">
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextLectureFirstName"
+        android:layout_alignParentTop="true"
+        android:hint= "Lecture First Name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint= "Lecture Last Name"
+        android:id="@+id/editTextLectureLastName"
+        android:layout_below="@+id/editTextLectureFirstName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint= "Lecture address"
+        android:id="@+id/editTextLectureAddress"
+        android:layout_below="@+id/editTextLectureLastName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="37dp"
+        android:layout_alignRight="@+id/editTextLectureId"
+        android:layout_alignEnd="@+id/editTextLectureId" />
+
+    <EditText
+        android:hint="Lecture Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextLectureId"
+        android:layout_below="@+id/editTextLectureLastName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editTextLectureLastName"
+        android:layout_alignEnd="@+id/editTextLectureLastName" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Lecture"
+        android:onClick="onCLickAddLecture"
+        android:id="@+id/buttonAddLecture"
+        android:layout_below="@+id/editTextLectureAddress"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editTextLectureFirstName"
+        android:layout_alignEnd="@+id/editTextLectureFirstName" />
 </RelativeLayout>
