@@ -66,7 +66,6 @@ public class CourseAdapter extends BaseAdapter {
         viewCourseRow.courseID.setText(idCourseStr);
         viewCourseRow.courseName.setText(courses.get(position).getCourseName());
         viewCourseRow.courseSemester.setText(courses.get(position).getSemester());
-       // viewCourseRow.courseYear.setText(courses.get(position).getYear());
         int idYear = courses.get(position).getYear();
         String courseYear = Integer.toString(idYear);
         viewCourseRow.courseYear.setText(courseYear);

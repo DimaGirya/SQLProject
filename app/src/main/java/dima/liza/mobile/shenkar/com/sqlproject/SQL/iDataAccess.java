@@ -2,6 +2,7 @@ package dima.liza.mobile.shenkar.com.sqlproject.SQL;
 
 import java.util.List;
 
+import dima.liza.mobile.shenkar.com.sqlproject.students.grade.StudentGrade;
 import dima.liza.mobile.shenkar.com.sqlproject.courses.Course;
 import dima.liza.mobile.shenkar.com.sqlproject.Grade;
 import dima.liza.mobile.shenkar.com.sqlproject.lectures.Lecture;
@@ -27,4 +28,5 @@ public interface iDataAccess {
     boolean removeGrade(Grade grade);
 
 
+    List<StudentGrade> getStudentGrades(String studentId);
 }

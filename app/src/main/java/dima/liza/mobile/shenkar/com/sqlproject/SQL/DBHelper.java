@@ -109,31 +109,32 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL(defaultDataCourses[i]);
             Log.d(TAG, defaultDataCourses[i]);
         }
-        /*
+
         String defaultDataGrades[] = {
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('101','10001','95')",
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('101','10002','90')",
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('101','10003','80')",
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('101','10004','100')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10001','95')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10002','90')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10003','80')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10004','100')",
 
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('102','10001','95')",
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('102','10002','100')",
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('102','10003','90')",
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('102','10004','85')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('102','10001','95')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('102','10002','100')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('102','10003','90')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('102','10004','85')",
 
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('103','10001','95')",
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('103','10002','80')",
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('103','10003','60')",
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('103','10004','45')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('103','10001','95')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('103','10002','80')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('103','10003','60')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('103','10004','45')",
 
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('104','10001','88')",
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('104','10002','80')",
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('104','10003','70')",
-                "INSERT INTO Courses(StudentId, CourseId, Grade) VALUES ('104','10004','95')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('104','10001','88')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('104','10002','80')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('104','10003','70')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('104','10004','95')",
         };
         for (int i = 0; i < defaultDataGrades.length; i++) {
             db.execSQL(defaultDataGrades[i]);
+            Log.d(TAG, defaultDataGrades[i]);
         }
-        */
+
     }
 }

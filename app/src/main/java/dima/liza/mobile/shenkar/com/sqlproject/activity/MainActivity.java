@@ -1,9 +1,7 @@
 package dima.liza.mobile.shenkar.com.sqlproject.activity;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,13 +14,14 @@ import java.util.List;
 
 import dima.liza.mobile.shenkar.com.sqlproject.R;
 import dima.liza.mobile.shenkar.com.sqlproject.SQL.DataAccess;
-import dima.liza.mobile.shenkar.com.sqlproject.SQL.DbContract;
 import dima.liza.mobile.shenkar.com.sqlproject.courses.Course;
 import dima.liza.mobile.shenkar.com.sqlproject.courses.CourseAdapter;
 import dima.liza.mobile.shenkar.com.sqlproject.lectures.Lecture;
 import dima.liza.mobile.shenkar.com.sqlproject.lectures.LectureAdapter;
 import dima.liza.mobile.shenkar.com.sqlproject.students.Student;
 import dima.liza.mobile.shenkar.com.sqlproject.students.StudentAdapter;
+import dima.liza.mobile.shenkar.com.sqlproject.students.grade.StudentGrade;
+import dima.liza.mobile.shenkar.com.sqlproject.students.grade.StudentGradeAdapter;
 
 public class MainActivity extends AppCompatActivity {
     final int REQUEST_ADD_STUDENT = 1;
@@ -68,19 +67,19 @@ public class MainActivity extends AppCompatActivity {
             }
             case REQUEST_ADD_LECTURE:{
                 if(resultCode== Activity.RESULT_OK){
-
+                //todo
                 }
                 break;
             }
             case REQUEST_ADD_COURSE:{
                 if(resultCode== Activity.RESULT_OK){
-
+                    //todo
                 }
                 break;
             }
             case REQUEST_ADD_GRADE:{
                 if(resultCode== Activity.RESULT_OK){
-
+                    //todo
                 }
                 break;
             }
@@ -171,6 +170,10 @@ public class MainActivity extends AppCompatActivity {
             }
             case R.id.buttonShowGradesOfStudent:{
                 Log.i(TAG,"buttonShowGradesOfStudent click");
+                String studentId = editTextStudentId.getText().toString();
+                List<StudentGrade> studentGrade = dataAccess.getStudentGrades(studentId);
+                StudentGradeAdapter studentGradeAdapter = new StudentGradeAdapter(this,studentGrade);
+                listView.setAdapter(studentGradeAdapter);
                 break;
             }
             case R.id.buttonTop3Students:{

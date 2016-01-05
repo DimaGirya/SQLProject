@@ -9,6 +9,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import dima.liza.mobile.shenkar.com.sqlproject.students.grade.StudentGrade;
 import dima.liza.mobile.shenkar.com.sqlproject.courses.Course;
 import dima.liza.mobile.shenkar.com.sqlproject.Grade;
 import dima.liza.mobile.shenkar.com.sqlproject.lectures.Lecture;
@@ -159,7 +160,7 @@ public class DataAccess implements  iDataAccess {
         String firstName = cursor.getString(cursor.getColumnIndex( DbContract.LectureEntry.COLUMN_FIRST_NAME));
         String lastName = cursor.getString(cursor.getColumnIndex(DbContract.LectureEntry.COLUMN_LAST_NAME));
         String address = cursor.getString(cursor.getColumnIndex( DbContract.LectureEntry.COLUMN_ADDRESS));
-        Lecture lecture = new Lecture(studentId,firstName,lastName,address);;
+        Lecture lecture = new Lecture(studentId,firstName,lastName,address);
         return lecture;
     }
 
@@ -227,5 +228,51 @@ public class DataAccess implements  iDataAccess {
     @Override
     public boolean removeGrade(Grade grade) {
         return false;
+    }
+
+    @Override
+    public List<StudentGrade> getStudentGrades(String studentId) {
+        try {
+            database = dbHelper.getReadableDatabase();
+            List<StudentGrade> studentGrades = new ArrayList<StudentGrade>();
+    String sqlJoin  = "SELECT Students.LastName,Students.FirstName,Grades.StudentId, Grades.Grade,Courses.CourseName "
+             + "FROM Students "
+             + "INNER JOIN Grades "
+             + "ON Grades.StudentId = Students.StudentID "
+             +  "INNER JOIN Courses "
+             +  "ON Grades.CourseId = Courses.CourseID "
+             +  "WHERE Students.StudentID = ? ";
+            String  selectionArgs[] = new String[1];
+            selectionArgs[0] = studentId;
+            Log.d(TAG,sqlJoin);
+            Cursor cursor =  database.rawQuery(sqlJoin,selectionArgs);  // error !!! exeption
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                StudentGrade studentGrade = getStudentGradesFromCursor(cursor);
+                studentGrades.add(studentGrade);
+                cursor.moveToNext();
+            }
+            cursor.close();
+            return studentGrades;
+        }
+        catch (Exception  e){
+            Log.d(TAG, "Error,Exception:",e);
+        }
+        finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+        return null;
+    }
+
+    private StudentGrade getStudentGradesFromCursor(Cursor cursor) {
+        int studentId = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Grades.StudentId")));
+        String firstName = cursor.getString(cursor.getColumnIndex("Students.FirstName"));
+        String lastName = cursor.getString(cursor.getColumnIndex("Students.LastName"));
+        String courseName = cursor.getString(cursor.getColumnIndex( "Courses.CourseName"));
+        int grades = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Grades.Grade")));
+        StudentGrade studentGrade = new StudentGrade(lastName,firstName,studentId ,courseName,grades);
+        return studentGrade;
     }
 }
