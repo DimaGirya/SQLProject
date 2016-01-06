@@ -9,4 +9,64 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="dima.liza.mobile.shenkar.com.sqlproject.activity.AddCourseActivity">
 
+    <EditText
+        android:hint="Course Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextCourseId"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/editTextCourseSemester"
+        android:layout_alignEnd="@+id/editTextCourseSemester"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:hint="Course Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextCourseName"
+        android:layout_below="@+id/editTextCourseId"
+        android:layout_alignRight="@+id/editTextCourseSemester"
+        android:layout_alignEnd="@+id/editTextCourseSemester"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:hint="Course Semester"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextCourseSemester"
+        android:layout_below="@+id/editTextCourseName"
+        android:layout_alignRight="@+id/editTextCourseYear"
+        android:layout_alignEnd="@+id/editTextCourseYear"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:hint="Course Year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextCourseYear"
+        android:layout_below="@+id/editTextCourseSemester"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editTextCourseLectureId"
+        android:layout_alignEnd="@+id/editTextCourseLectureId" />
+
+    <EditText
+        android:hint="Course Lecture Id(or empty if no lecture)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextCourseLectureId"
+        android:layout_below="@+id/editTextCourseYear" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Course"
+        android:onClick="onClickButtonAddCourse"
+        android:id="@+id/buttonAddCourse"
+        android:layout_below="@+id/editTextCourseLectureId"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
