@@ -10,7 +10,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Course ID"
         android:id="@+id/textViewCourseId"
-        android:layout_weight="0.30" />
+        android:padding="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Course Name"
         android:id="@+id/textViewCourseName"
-        android:layout_weight="0.11" />
+        android:padding="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Semester"
         android:id="@+id/textViewCourseSemester"
-        android:layout_weight="0.08" />
+        android:padding="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,12 +34,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Year"
         android:id="@+id/textViewCourseYear"
-        android:layout_weight="0.22" />
+        android:padding="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Lecture Id"
+        android:padding="5dp"
         android:id="@+id/textViewCourseLectureId" />
 </LinearLayout>

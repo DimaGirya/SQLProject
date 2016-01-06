@@ -84,7 +84,21 @@ public class MainActivity extends AppCompatActivity {
             }
             case REQUEST_ADD_COURSE:{
                 if(resultCode== Activity.RESULT_OK){
-                     //todo
+                    String strCourseId  = data.getStringExtra("courseId");
+                    int courseId  = Integer.parseInt(strCourseId);
+                    String courseName  = data.getStringExtra("courseName");
+                    String courseSemester  = data.getStringExtra("courseSemester");
+                    String strCourseYear  = data.getStringExtra("courseYear");
+                    int courseYear  = Integer.parseInt(strCourseYear);
+                    String strLectureId  = data.getStringExtra("lectureId");
+                    int lectureId  = Integer.parseInt(strLectureId);
+                    Course courseGrade = new Course(courseId,courseName,courseSemester,courseYear,lectureId);
+                    if(dataAccess.addCourse(courseGrade)){
+                        Toast.makeText(this,"Course add to data base",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(this,"Course not add to data base,try again",Toast.LENGTH_LONG).show();
+                    }
                 }
                 break;
             }

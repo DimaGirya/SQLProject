@@ -9,7 +9,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Student Id"
         android:id="@+id/textViewStudentID"
-        android:layout_weight="0.28" />
+        android:padding="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,7 +17,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="First Name"
         android:id="@+id/textViewFirstNameStudent"
-        android:layout_weight="0.19" />
+        android:padding="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,13 +25,14 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Last name"
         android:id="@+id/textViewLastNameStudent"
-        android:layout_weight="0.29" />
+        android:padding="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Date Of Birth"
+        android:padding="5dp"
         android:id="@+id/textViewDateOfBirthStudent" />
 
     <TextView
@@ -40,5 +41,5 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Address"
         android:id="@+id/textViewAddressStudent"
-        android:layout_weight="0.56" />
+        android:padding="5dp" />
 </LinearLayout>

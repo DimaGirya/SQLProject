@@ -221,6 +221,27 @@ public class DataAccess implements  iDataAccess {
 
     @Override
     public boolean addCourse(Course course) {
+        ContentValues content = new ContentValues();
+        content.put(DbContract.CourseEntry.COLUMN_COURSE_ID, course.getCourseId());
+        content.put(DbContract.CourseEntry.COLUMN_COURSE_NAME, course.getCourseName());
+        content.put(DbContract.CourseEntry.COLUMN_SEMESTER, course.getSemester());
+        content.put(DbContract.CourseEntry.COLUMN_YEAR, course.getYear());
+        content.put(DbContract.CourseEntry.COLUMN_LECTURE_ID, course.getLectureId());
+        try {
+            database = dbHelper.getReadableDatabase();
+            if(database.insert(DbContract.CourseEntry.TABLE_NAME,null,content)==-1){
+                return false;
+            }
+            else{
+                return true;
+            }
+        } catch (Exception e) {
+            Log.e(TAG,"Exception!",e);
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
         return false;
     }
 
