@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SQLProject</string>
+    <string name="getStudentList">Get student list</string>
 </resources>

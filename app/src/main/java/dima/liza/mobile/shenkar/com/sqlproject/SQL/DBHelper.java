@@ -81,7 +81,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 "INSERT INTO Students (StudentId, LastName, FirstName, Address, DateOfBirth) VALUES ('101','Gilman','Liza','zahal kiryat-ono','22/10/91');",
                 "INSERT INTO Students (StudentId, LastName, FirstName, Address, DateOfBirth) VALUES ('102','Girya','Dima','geva netanya','14/01/90');",
                 " INSERT INTO Students (StudentId, LastName, FirstName, Address, DateOfBirth) VALUES ('103','Cohen','Asi','alenby tel-aviv','01/01/89');",
-                "INSERT INTO Students (StudentId, LastName, FirstName, Address, DateOfBirth) VALUES ('104','Israeli','Israel','bialik ramat-gan','22/10/91');"
+                "INSERT INTO Students (StudentId, LastName, FirstName, Address, DateOfBirth) VALUES ('104','Israeli','Israel','bialik ramat-gan','22/10/91');",
+                "INSERT INTO Students (StudentId, LastName, FirstName, Address, DateOfBirth) VALUES ('105','Alis','Yuval','Herzliya','01/01/80');",
+                " INSERT INTO Students (StudentId, LastName, FirstName, Address, DateOfBirth) VALUES ('106','Amit','Or','Haifa','03/03/87');",
+                " INSERT INTO Students (StudentId, LastName, FirstName, Address, DateOfBirth) VALUES ('107','Assulin','Almog','Tel-aviv','03/08/91');",
+                "INSERT INTO Students (StudentId, LastName, FirstName, Address, DateOfBirth) VALUES ('108','Gendalman','Alexs','Netanya','05/01/93');",
+                " INSERT INTO Students (StudentId, LastName, FirstName, Address, DateOfBirth) VALUES ('109','Zak','Emil','Netanya','03/08/92');",
+                " INSERT INTO Students (StudentId, LastName, FirstName, Address, DateOfBirth) VALUES ('110','Kapah','Nama','Herzliya','03/08/93');"
+
         };
         for (int i = 0; i < defaultDataStudents.length; i++) {
             db.execSQL(defaultDataStudents[i]);
@@ -92,7 +99,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES ('1001','Yigal','Hoffner','bialik ramat-gan')",
                 "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES  ('1002','Riva','Shalom','Ben-Gurion givataim');",
                 "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES ('1003','Marselo','Shichman','sokolov Hod-HasSharon')",
-                "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES ('1004','Yehiel','Kimhi','moria Haifa')"
+                "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES ('1004','Yehiel','Kimhi','moria Haifa')",
+                "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES ('1005','Ichak','Nudler','Tel-aviv')",
+                "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES  ('1006','Nezer','Zidbnger','Haifa');",
+                "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES ('1007','Yonit','Risho','Hadera')",
+                "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES ('1008','Haim','Mihael','Haifa')",
+                "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES ('1009','Noa','Levinshten','Bne-brak')",
+                "INSERT INTO Lectures(LectureId, FirstName, LastName, Address) VALUES ('1010','Amanuel','Grindar','Haifa')"
         };
         for (int i = 0; i < defaultDataLectures.length; i++) {
             db.execSQL(defaultDataLectures[i]);
@@ -101,9 +114,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String defaultDataCourses[] = {
                 "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES ('10001','Assembly','A','2015','1001')",
-                "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES  ('10002','Digital Systems','B','2014','1002')",
-                "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES ('10003','C++','A','2014','1003')",
-                "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES ('10004','Software Design','B','2015','1004')"
+                "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES ('10002','Digital Systems','B','2015','1002')",
+                "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES ('10003','C++','A','2015','1003')",
+                "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES ('10004','Software Design','B','2015','1004')",
+                "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES ('10005','Tikshoret','A','2015','1005')",
+                "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES ('10006','Unix','B','2015','1006')",
+                "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES ('10007','Web','A','2015','1007')",
+                "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES ('10008','Java','B','2015','1008')",
+                "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES ('10009','Formal languages','A','2015','1009')",
+                "INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId) VALUES ('10010','Operating Systems','B','2015','1010')"
         };
         for (int i = 0; i < defaultDataCourses.length; i++) {
             db.execSQL(defaultDataCourses[i]);
@@ -115,6 +134,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10002','90')",
                 "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10003','80')",
                 "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10004','100')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10005','89')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10006','95')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10007','89')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10008','93')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10009','87')",
+                "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('101','10010','99')",
 
                 "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('102','10001','95')",
                 "INSERT INTO Grades(StudentId, CourseId, Grade) VALUES ('102','10002','100')",

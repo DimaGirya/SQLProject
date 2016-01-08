@@ -294,7 +294,7 @@ public class DataAccess implements  iDataAccess {
         try {
             database = dbHelper.getReadableDatabase();
             List<StudentGrade> studentGrades = new ArrayList<StudentGrade>();
-    String sqlJoin  = "SELECT Students.LastName,Students.FirstName,Grades.StudentId, Grades.Grade,Courses.CourseName "
+            String sqlJoin  = "SELECT Students.LastName,Students.FirstName,Grades.StudentId, Grades.Grade,Courses.CourseName "
              + "FROM Students "
              + "INNER JOIN Grades "
              + "ON Grades.StudentId = Students.StudentID "
