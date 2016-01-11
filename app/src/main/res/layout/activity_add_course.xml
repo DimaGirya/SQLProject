@@ -69,4 +69,14 @@
         android:layout_below="@+id/editTextCourseLectureId"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/editCourseButton"
+        android:id="@+id/buttonEditCourse"
+        android:onClick="onClickEditCourse"
+        android:layout_below="@+id/editTextCourseLectureId"
+        android:layout_toRightOf="@+id/buttonAddCourse"
+        android:layout_toEndOf="@+id/buttonAddCourse" />
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package dima.liza.mobile.shenkar.com.sqlproject.students.grade;
+package dima.liza.mobile.shenkar.com.sqlproject.grade;
 
 /**
  * Created by Girya on 1/5/2016.

@@ -1,4 +1,4 @@
-package dima.liza.mobile.shenkar.com.sqlproject.students.grade;
+package dima.liza.mobile.shenkar.com.sqlproject.grade;
 
 import android.widget.TextView;
 

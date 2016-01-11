@@ -79,4 +79,8 @@ public class AddCourseActivity extends AppCompatActivity {
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
+
+    public void onClickEditCourse(View view) {
+
+    }
 }

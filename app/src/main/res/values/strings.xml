@@ -27,4 +27,5 @@
     <string name="activityEditTextCourseSemester">Course Semester</string>
     <string name="activityEditTextCourseYear">Course Year</string>
     <string name="editTextCourseLectureId">Course Lecture Id(or empty if no lecture)</string>
+    <string name="editCourseButton">Edit Course</string>
 </resources>
