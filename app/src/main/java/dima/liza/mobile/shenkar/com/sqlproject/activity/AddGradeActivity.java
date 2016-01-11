@@ -23,6 +23,15 @@ public class AddGradeActivity extends AppCompatActivity {
          editTextCourseId = (EditText) findViewById(R.id.editTextAddGradeCourseId);
          editTextStudentId =  (EditText) findViewById(R.id.editTextAddGradeStudentId);
          editTextGrade = (EditText)findViewById(R.id.editTexdAddGradeGrade);
+        Intent intent = getIntent();
+        String inputCourseId = intent.getStringExtra("courseId");
+        if(!inputCourseId.equals("NO_COURSE_ID")){
+            editTextCourseId.setText(inputCourseId);
+        }
+        String inputStudentId = intent.getStringExtra("studentId");
+        if(!inputStudentId.equals("NO_STUDENT_ID")){
+            editTextStudentId.setText(inputStudentId);
+        }
     }
 
     public void onClickButtonAddGrade(View view) {
@@ -30,6 +39,7 @@ public class AddGradeActivity extends AppCompatActivity {
         String courseId = editTextCourseId.getText().toString();
         String studentId = editTextStudentId.getText().toString();
         String grade = editTextGrade.getText().toString();
+
         if (courseId.equals("")) {
             Toast.makeText(this, "You need to input a student ID", Toast.LENGTH_SHORT).show();
             return;

@@ -27,6 +27,11 @@ public class AddStudentActivity extends AppCompatActivity {
         editTextStudentLastName = (EditText)findViewById(R.id.editTextAddStudentLastName);
         editTextStudentAddress = (EditText)findViewById(R.id.editTextAddStudentAddress) ;
         editTextDateOfBirthday = (EditText)findViewById(R.id.editTextStudentDateOfBirhday);
+        Intent intent = getIntent();
+        String inputStudentId = intent.getStringExtra("studentId");
+        if(!inputStudentId.equals("NO_STUDENT_ID")){
+            editTextStudentId.setText(inputStudentId);
+        }
     }
 
     public void onClickAddStudent(View view) {

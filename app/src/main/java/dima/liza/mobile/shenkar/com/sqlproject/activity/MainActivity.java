@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         dataAccess = DataAccess.getInstatnce(this);
         listView = (ListView) findViewById(R.id.listView);
         editTextStudentId = (EditText) findViewById(R.id.editTextStudentId);
-        editTextCourseId = (EditText) findViewById(R.id.editTextLectureId);
-        editTextLectueId = (EditText)findViewById(R.id.editTextCourseId) ;
+        editTextCourseId = (EditText) findViewById(R.id.editTextCourseId);
+        editTextLectueId = (EditText)findViewById(R.id.editTextLectureId) ;
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -154,28 +154,53 @@ public class MainActivity extends AppCompatActivity {
             case R.id.buttonAddStudent:{
                 Log.i(TAG, "buttonAddStudent click");
                 Intent intent = new Intent(this,AddStudentActivity.class);
+                String studentId = editTextStudentId.getText().toString();
+                if (studentId.equals("")) {
+                    studentId = "NO_STUDENT_ID";
+                }
+                intent.putExtra("studentId", studentId);
                 startActivityForResult(intent, REQUEST_ADD_STUDENT);
                 break;
             }
             case R.id.buttonAddCourse:{
                 Log.i(TAG,"buttonAddCourse click");
                 Intent intent = new Intent(this,AddCourseActivity.class);
-                String lectureId = editTextCourseId.getText().toString();
+                String lectureId = editTextLectueId.getText().toString();
                 if (lectureId.equals("")) {
                     lectureId = "NO_LECTURE_ID";
                 }
-                intent.putExtra("lectureId",lectureId);
+                intent.putExtra("lectureId", lectureId);
+                String courseId = editTextCourseId.getText().toString();
+                if (courseId.equals("")) {
+                    courseId = "NO_COURSE_ID";
+                }
+                intent.putExtra("courseId",courseId);
                 startActivityForResult(intent, REQUEST_ADD_COURSE);
                 break;
             }
             case R.id.buttonAddLecture:{
-                Intent intent = new Intent(this,AddLectureActivity.class);
-                startActivityForResult(intent, REQUEST_ADD_LECTURE);
                 Log.i(TAG,"buttonAddLecture click");
+                Intent intent = new Intent(this,AddLectureActivity.class);
+                String lectureId = editTextLectueId.getText().toString();
+                if (lectureId.equals("")) {
+                    lectureId = "NO_LECTURE_ID";
+                }
+                intent.putExtra("lectureId", lectureId);
+                startActivityForResult(intent, REQUEST_ADD_LECTURE);
                 break;
             }
             case R.id.buttonAddGrade:{
                 Intent intent = new Intent(this,AddGradeActivity.class);
+                String studentId = editTextStudentId.getText().toString();
+                if (studentId.equals("")) {
+                    studentId = "NO_STUDENT_ID";
+                }
+                intent.putExtra("studentId", studentId);
+                String courseId = editTextCourseId.getText().toString();
+                if (courseId.equals("")) {
+                    courseId = "NO_COURSE_ID";
+                }
+                intent.putExtra("courseId", courseId);
                 startActivityForResult(intent, REQUEST_ADD_GRADE);
                 Log.i(TAG,"buttonAddGrade click");
                 break;

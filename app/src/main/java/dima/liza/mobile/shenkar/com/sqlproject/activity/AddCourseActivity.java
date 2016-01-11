@@ -23,6 +23,15 @@ public class AddCourseActivity extends AppCompatActivity {
         editTextCourseSemester  = (EditText)findViewById(R.id.editTextCourseSemester);
         editTextCourseYear = (EditText)findViewById(R.id.editTextCourseYear);
         editTextLectureId = (EditText)findViewById(R.id.editTextCourseLectureId);
+        Intent intent = getIntent();
+        String inputLectureId = intent.getStringExtra("lectureId");
+        if(!inputLectureId.equals("NO_LECTURE_ID")){
+            editTextLectureId.setText(inputLectureId);
+        }
+        String inputCourseId = intent.getStringExtra("courseId");
+        if(!inputCourseId.equals("NO_COURSE_ID")){
+            editTextCourseId.setText(inputCourseId);
+        }
     }
 
     public void onClickButtonAddCourse(View view) {

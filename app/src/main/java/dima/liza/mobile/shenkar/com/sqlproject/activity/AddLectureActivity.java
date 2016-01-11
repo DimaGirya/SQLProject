@@ -22,6 +22,11 @@ public class AddLectureActivity extends AppCompatActivity {
         editTextLastName = (EditText) findViewById(R.id.editTextLectureLastName);
         editTextFirstName = (EditText) findViewById(R.id.editTextLectureFirstName);
         editTexAddress = (EditText) findViewById(R.id.editTextLectureAddress);
+        Intent intent = getIntent();
+        String inputLectureId = intent.getStringExtra("lectureId");
+        if(!inputLectureId.equals("NO_LECTURE_ID")){
+            editTextLectureId.setText(inputLectureId);
+        }
     }
 
     public void onCLickAddLecture(View view) {
