@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     DataAccess dataAccess;
     EditText editTextStudentId;
     EditText editTextCourseId;
+    EditText editTextLectueId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         dataAccess = DataAccess.getInstatnce(this);
         listView = (ListView) findViewById(R.id.listView);
         editTextStudentId = (EditText) findViewById(R.id.editTextStudentId);
-
+        editTextCourseId = (EditText) findViewById(R.id.editTextLectureId);
+        editTextLectueId = (EditText)findViewById(R.id.editTextCourseId) ;
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -158,6 +160,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.buttonAddCourse:{
                 Log.i(TAG,"buttonAddCourse click");
                 Intent intent = new Intent(this,AddCourseActivity.class);
+                String lectureId = editTextCourseId.getText().toString();
+                if (lectureId.equals("")) {
+                    lectureId = "NO_LECTURE_ID";
+                }
+                intent.putExtra("lectureId",lectureId);
                 startActivityForResult(intent, REQUEST_ADD_COURSE);
                 break;
             }
