@@ -15,17 +15,17 @@ public interface iDataAccess {
     List<Student> getAllStudents();
     List<Course> getAllCourses();
     List<Lecture> getAllLecture();
-    List<Grade> getAllGrades(); // need?
+
 
     boolean addStudent(Student student);
     boolean addLecture(Lecture lecture);
     boolean addCourse(Course course);
     boolean addGrade(Grade grade);
 
-    boolean removeStudent(Student student);
-    boolean removeLecture(Lecture lecture);
-    boolean removeCourse(Course course);
-    boolean removeGrade(Grade grade);
+    boolean removeStudent(int studentId);
+    boolean removeLecture(int lectureId);
+    boolean removeCourse(int courseId);
+    boolean removeGrade(int studentId,int courseId);
 
     List<StudentGrade> getStudentGrades(String studentId);
 

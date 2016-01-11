@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     DataAccess dataAccess;
     EditText editTextStudentId;
     EditText editTextCourseId;
-    EditText editTextLectueId;
+    EditText editTextLectureId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
         editTextStudentId = (EditText) findViewById(R.id.editTextStudentId);
         editTextCourseId = (EditText) findViewById(R.id.editTextCourseId);
-        editTextLectueId = (EditText)findViewById(R.id.editTextLectureId) ;
+        editTextLectureId = (EditText)findViewById(R.id.editTextLectureId) ;
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.buttonAddCourse:{
                 Log.i(TAG,"buttonAddCourse click");
                 Intent intent = new Intent(this,AddCourseActivity.class);
-                String lectureId = editTextLectueId.getText().toString();
+                String lectureId = editTextLectureId.getText().toString();
                 if (lectureId.equals("")) {
                     lectureId = "NO_LECTURE_ID";
                 }
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.buttonAddLecture:{
                 Log.i(TAG,"buttonAddLecture click");
                 Intent intent = new Intent(this,AddLectureActivity.class);
-                String lectureId = editTextLectueId.getText().toString();
+                String lectureId = editTextLectureId.getText().toString();
                 if (lectureId.equals("")) {
                     lectureId = "NO_LECTURE_ID";
                 }
@@ -190,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
             case R.id.buttonAddGrade:{
+                Log.i(TAG,"buttonAddGrade click");
                 Intent intent = new Intent(this,AddGradeActivity.class);
                 String studentId = editTextStudentId.getText().toString();
                 if (studentId.equals("")) {
@@ -202,23 +203,74 @@ public class MainActivity extends AppCompatActivity {
                 }
                 intent.putExtra("courseId", courseId);
                 startActivityForResult(intent, REQUEST_ADD_GRADE);
-                Log.i(TAG,"buttonAddGrade click");
+
                 break;
             }
             case R.id.buttonRemoveCourse:{
                 Log.i(TAG,"buttonRemoveCourse click");
+                try {
+                    int courseId = Integer.parseInt(editTextCourseId.getText().toString());
+                    if(dataAccess.removeCourse(courseId)){
+                        Toast.makeText(this,"Course remove succeed",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(this,"Course remove unsuccessful.No such course Id",Toast.LENGTH_LONG).show();
+                    }
+                }
+                catch (NumberFormatException e){
+                    Toast.makeText(this,"illegally course id",Toast.LENGTH_LONG).show();
+                }
+
                 break;
             }
             case R.id.buttonRemoveGrade:{
+                try{
+                    int studentId = Integer.parseInt(editTextStudentId.getText().toString());
+                    int courseId = Integer.parseInt(editTextCourseId.getText().toString());
+                    if(dataAccess.removeGrade(studentId,courseId)){
+                        Toast.makeText(this,"Grade remove succeed",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(this,"Grade remove unsuccessful.No such grade to remove",Toast.LENGTH_LONG).show();
+                    }
+                }
+                catch(NumberFormatException e){
+                    Toast.makeText(this,"illegally student or course id",Toast.LENGTH_LONG).show();
+                }
                 Log.i(TAG,"buttonRemoveGrade click");
                 break;
             }
             case R.id.buttonRemoveLecture:{
                 Log.i(TAG,"buttonRemoveLecture click");
+                try {
+                    int lectureId = Integer.parseInt(editTextLectureId.getText().toString());
+                    if(dataAccess.removeLecture(lectureId)){
+                        Toast.makeText(this,"Lecture remove succeed",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(this,"Lecture remove unsuccessful.No such lecture Id",Toast.LENGTH_LONG).show();
+                    }
+                }
+                catch (NumberFormatException e){
+                    Toast.makeText(this,"illegally lecture id",Toast.LENGTH_LONG).show();
+                }
+
                 break;
             }
             case R.id.buttonRemoveStudent:{
                 Log.i(TAG,"buttonRemoveStudent click");
+                try {
+                    int studentId = Integer.parseInt(editTextStudentId.getText().toString());
+                    if(dataAccess.removeStudent(studentId)){
+                        Toast.makeText(this,"Student remove succeed",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(this,"Student remove unsuccessful.No such student Id",Toast.LENGTH_LONG).show();
+                    }
+                }
+                catch (NumberFormatException e){
+                    Toast.makeText(this,"illegally student id",Toast.LENGTH_LONG).show();
+                }
                 break;
             }
             case R.id.buttonEditGrade:{

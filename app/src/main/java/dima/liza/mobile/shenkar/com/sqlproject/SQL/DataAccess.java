@@ -63,7 +63,6 @@ public class DataAccess implements  iDataAccess {
                 studentList.add(student);
                 cursor.moveToNext();
             }
-            // java.util.Collections.sort(taskList);
             cursor.close();
             return studentList;
         }
@@ -75,12 +74,12 @@ public class DataAccess implements  iDataAccess {
                 database.close();
             }
         }
-        return null;    //warning
+        return null;
     }
 
     private Student getStudentFromCursor(Cursor cursor) {
         int studentId = cursor.getInt(cursor.getColumnIndex(DbContract.StudentEntry.COLUMN_STUDENT_ID));
-        String firstName = cursor.getString(cursor.getColumnIndex( DbContract.StudentEntry.COLUMN_FIRST_NAME));
+        String firstName = cursor.getString(cursor.getColumnIndex(DbContract.StudentEntry.COLUMN_FIRST_NAME));
         String lastName = cursor.getString(cursor.getColumnIndex(DbContract.StudentEntry.COLUMN_LAST_NAME));
         String address = cursor.getString(cursor.getColumnIndex( DbContract.StudentEntry.COLUMN_ADDRESS));
         String dateOfBirth = cursor.getString(cursor.getColumnIndex( DbContract.StudentEntry.COLUMN_DATE_OF_BIRTH));
@@ -107,7 +106,7 @@ public class DataAccess implements  iDataAccess {
             return courseList;
         }
         catch (Exception  e){
-            Log.d(TAG, "Error,Exception:",e);
+            Log.d(TAG, "Error,Exception:", e);
         }
         finally {
             if (database != null) {
@@ -144,7 +143,7 @@ public class DataAccess implements  iDataAccess {
             return lectureList;
         }
         catch (Exception  e){
-            Log.d(TAG, "Error,Exception:",e);
+            Log.d(TAG, "Error,Exception:", e);
         }
         finally {
             if (database != null) {
@@ -163,10 +162,7 @@ public class DataAccess implements  iDataAccess {
         return lecture;
     }
 
-    @Override
-    public List<Grade> getAllGrades() {
-        return null;
-    }
+
 
     @Override
     public boolean addStudent(Student student) {
@@ -186,12 +182,12 @@ public class DataAccess implements  iDataAccess {
             }
         } catch (Exception e) {
             Log.e(TAG,"Exception!",e);
+            return false;
         } finally {
             if (database != null) {
                 database.close();
             }
         }
-        return false;
     }
 
     @Override
@@ -210,13 +206,13 @@ public class DataAccess implements  iDataAccess {
                 return true;
             }
         } catch (Exception e) {
-            Log.e(TAG,"Exception!",e);
+            Log.e(TAG, "Exception!", e);
+            return false;
         } finally {
             if (database != null) {
                 database.close();
             }
         }
-        return false;
     }
 
     @Override
@@ -237,12 +233,12 @@ public class DataAccess implements  iDataAccess {
             }
         } catch (Exception e) {
             Log.e(TAG,"Exception!",e);
+            return false;
         } finally {
             if (database != null) {
                 database.close();
             }
         }
-        return false;
     }
 
     @Override
@@ -260,34 +256,114 @@ public class DataAccess implements  iDataAccess {
                 return true;
             }
         } catch (Exception e) {
-            Log.e(TAG,"Exception!",e);
+            Log.e(TAG, "Exception!", e);
+            return false;
         } finally {
             if (database != null) {
                 database.close();
             }
         }
-        return false;
     }
 
     @Override
-    public boolean removeStudent(Student student) {
-        return false;
+    public boolean removeStudent(int studentId) {
+        database = dbHelper.getReadableDatabase();
+        String whereClauseStudent = DbContract.StudentEntry.COLUMN_STUDENT_ID + " = ? ";
+        String whereArgs[] = new String[1];
+        String whereClauseGrade = DbContract.GradeEntry.COLUMN_STUDENT_ID + " = ? ";
+        whereArgs[0] = Integer.toString(studentId);
+
+        database.beginTransaction();
+        try {
+            if(database.delete(DbContract.StudentEntry.TABLE_NAME,whereClauseStudent,whereArgs)!=1){
+                return false;
+            }
+            database.delete(DbContract.GradeEntry.TABLE_NAME,whereClauseGrade,whereArgs);
+            database.setTransactionSuccessful();
+            return true;
+        }
+        catch(Exception e){
+            Log.e(TAG,"Exception!",e);
+            return false;
+        }
+        finally {
+            database.endTransaction();
+        }
     }
 
     @Override
-    public boolean removeLecture(Lecture lecture) {
-        return false;
+    public boolean removeLecture(int lectureId) {
+        database = dbHelper.getReadableDatabase();
+        String whereClauseLecture = DbContract.LectureEntry.COLUMN_LECTURE_ID + " = ? ";
+        String whereArgs[] = new String[1];
+        whereArgs[0] = Integer.toString(lectureId);
+        String whereClauseCourse = DbContract.CourseEntry.COLUMN_LECTURE_ID + " = ?";
+        ContentValues values = new ContentValues();
+        values.put(DbContract.CourseEntry.COLUMN_LECTURE_ID,-1);
+        database.beginTransaction();
+        try {
+            if(database.delete(DbContract.LectureEntry.TABLE_NAME,whereClauseLecture,whereArgs)!=1){
+                return false;
+            }
+            database.update(DbContract.CourseEntry.TABLE_NAME,values,whereClauseCourse,whereArgs);
+            database.setTransactionSuccessful();
+            return true;
+        }
+        catch(Exception e){
+            Log.e(TAG,"Exception!",e);
+            return false;
+        }
+        finally {
+            database.endTransaction();
+        }
     }
 
     @Override
-    public boolean removeCourse(Course course) {
-        return false;
+    public boolean removeCourse(int courseId) {
+        database = dbHelper.getReadableDatabase();
+        String whereClauseCourse = DbContract.CourseEntry.COLUMN_COURSE_ID + " = ? ";
+        String whereArgs[] = new String[1];
+        String whereClauseStudent = DbContract.GradeEntry.COLUMN_COURSE_ID + " = ? ";
+        whereArgs[0] = Integer.toString(courseId);
+
+        database.beginTransaction();
+        try {
+            if(database.delete(DbContract.CourseEntry.TABLE_NAME,whereClauseCourse,whereArgs)!=1){
+                return false;
+            }
+            database.delete(DbContract.GradeEntry.TABLE_NAME,whereClauseStudent,whereArgs);
+            database.setTransactionSuccessful();
+            return true;
+        }
+        catch(Exception e){
+            Log.e(TAG,"Exception!",e);
+            return false;
+        }
+        finally {
+            database.endTransaction();
+        }
     }
 
     @Override
-    public boolean removeGrade(Grade grade) {
-        return false;
+    public boolean removeGrade(int studentId, int courseId) {
+        database = dbHelper.getReadableDatabase();
+        String whereClauseGrade = DbContract.GradeEntry.COLUMN_STUDENT_ID + " = ? " + " AND "
+                + DbContract.GradeEntry.COLUMN_COURSE_ID + " = ? ";
+        String whereArgs[] = new String[2];
+        whereArgs[0] = Integer.toString(studentId);
+        whereArgs[1] = Integer.toString(courseId);
+        try {
+            if(database.delete(DbContract.GradeEntry.TABLE_NAME,whereClauseGrade,whereArgs)!=1){
+                return false;
+            }
+            return true;
+        }
+        catch(Exception e){
+            Log.e(TAG,"Exception!",e);
+            return false;
+        }
     }
+
 
     @Override
     public List<StudentGrade> getStudentGrades(String studentId) {
@@ -304,7 +380,7 @@ public class DataAccess implements  iDataAccess {
             String  selectionArgs[] = new String[1];
             selectionArgs[0] = studentId;
             Log.d(TAG,sqlJoin);
-            Cursor cursor =  database.rawQuery(sqlJoin,selectionArgs);  // error !!! exeption
+            Cursor cursor =  database.rawQuery(sqlJoin,selectionArgs);
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 StudentGrade studentGrade = getStudentGradesFromCursor(cursor);
@@ -313,9 +389,8 @@ public class DataAccess implements  iDataAccess {
             }
             cursor.close();
             return studentGrades;
-        }
-        catch (Exception  e){
-            Log.d(TAG, "Error,Exception:",e);
+        } catch (Exception e) {
+            Log.d(TAG, "Error,Exception:", e);
         }
         finally {
             if (database != null) {
@@ -346,9 +421,8 @@ public class DataAccess implements  iDataAccess {
             }
             Course course = getCurseFromCursor(cursor);
             return course;
-        }
-        catch (Exception  e){
-            Log.d(TAG, "Error,Exception:",e);
+        } catch (Exception e) {
+            Log.d(TAG, "Error,Exception:", e);
         }
         finally {
             if (database != null) {
@@ -378,9 +452,8 @@ public class DataAccess implements  iDataAccess {
             }
             Student student = getStudentFromCursor(cursor);
             return student;
-        }
-        catch (Exception  e){
-            Log.d(TAG, "Error,Exception:",e);
+        } catch (Exception e) {
+            Log.d(TAG, "Error,Exception:", e);
         }
         finally {
             if (database != null) {
@@ -423,11 +496,11 @@ public class DataAccess implements  iDataAccess {
     }
 
     private StudentGrade getStudentGradesFromCursor(Cursor cursor) {
-        int studentId = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Grades.StudentId")));
+        int studentId = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Grades.StudentId"))); // Exception!!!
         String firstName = cursor.getString(cursor.getColumnIndex("Students.FirstName"));
         String lastName = cursor.getString(cursor.getColumnIndex("Students.LastName"));
         String courseName = cursor.getString(cursor.getColumnIndex( "Courses.CourseName"));
-        int grades = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Grades.Grade")));
+        int grades = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Grades.Grade"))); // Exception!!!
         StudentGrade studentGrade = new StudentGrade(lastName,firstName,studentId ,courseName,grades);
         return studentGrade;
     }
