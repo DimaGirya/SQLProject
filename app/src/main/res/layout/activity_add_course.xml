@@ -10,7 +10,7 @@
     tools:context="dima.liza.mobile.shenkar.com.sqlproject.activity.AddCourseActivity">
 
     <EditText
-        android:hint="Course Id"
+        android:hint="@string/activityEditTextCourseId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextCourseId"
@@ -21,7 +21,7 @@
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:hint="Course Name"
+        android:hint="@string/activityEditTextCourseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextCourseName"
@@ -32,7 +32,7 @@
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:hint="Course Semester"
+        android:hint="@string/activityEditTextCourseSemester"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextCourseSemester"
@@ -43,7 +43,7 @@
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:hint="Course Year"
+        android:hint="@string/activityEditTextCourseYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextCourseYear"
@@ -54,7 +54,7 @@
         android:layout_alignEnd="@+id/editTextCourseLectureId" />
 
     <EditText
-        android:hint="Course Lecture Id(or empty if no lecture)"
+        android:hint="@string/editTextCourseLectureId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextCourseLectureId"
@@ -63,7 +63,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Course"
+        android:text="@string/buttonAddCourse"
         android:onClick="onClickButtonAddCourse"
         android:id="@+id/buttonAddCourse"
         android:layout_below="@+id/editTextCourseLectureId"

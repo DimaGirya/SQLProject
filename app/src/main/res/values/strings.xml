@@ -1,4 +1,30 @@
 <resources>
     <string name="app_name">SQLProject</string>
     <string name="getStudentList">Get student list</string>
+    <string name="getCourseList">GET COURSES LIST</string>
+    <string name="getLectureList">GET LECTURES LIST</string>
+    <string name="addStudent">Add student</string>
+    <string name="removeStudent">REMOVE STUDNET</string>
+    <string name="editStudent">EDIT STUDENT</string>
+    <string name="addGrade">Add grade</string>
+    <string name="removeGrade">REMOVE GRADE</string>
+    <string name="editGrade">EDIT GRADE</string>
+    <string name="addLecture">ADD LECTURE</string>
+    <string name="removeLecture">REMOVE LECTURE</string>
+    <string name="editLecture">EDIT LECTURE</string>
+    <string name="removeCourse">REMOVE COURSE</string>
+    <string name="editCourse">EDIT COURSE</string>
+    <string name="addCourse">ADD COURSE</string>
+    <string name="showGradeStudent">Show grades of student</string>
+    <string name="topStudent">Top 3 Student</string>
+    <string name="botomStudent">Bottom 3 Student</string>
+    <string name="editTextStudentId">Student Id</string>
+    <string name="editTextLectureId">Lecture Id</string>
+    <string name="editTextCourseId">Course Id</string>
+    <string name="buttonAddCourse">Add Course</string>
+    <string name="activityEditTextCourseId">Course Id</string>
+    <string name="activityEditTextCourseName">Course Name</string>
+    <string name="activityEditTextCourseSemester">Course Semester</string>
+    <string name="activityEditTextCourseYear">Course Year</string>
+    <string name="editTextCourseLectureId">Course Lecture Id(or empty if no lecture)</string>
 </resources>
