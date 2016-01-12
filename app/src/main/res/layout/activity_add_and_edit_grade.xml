@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="dima.liza.mobile.shenkar.com.sqlproject.activity.AddGradeActivity">
+    tools:context=".activity.AddAndEditGradeActivity">
 
     <EditText
         android:layout_width="wrap_content"

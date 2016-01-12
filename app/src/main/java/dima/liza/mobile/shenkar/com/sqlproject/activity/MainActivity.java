@@ -2,6 +2,7 @@ package dima.liza.mobile.shenkar.com.sqlproject.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import dima.liza.mobile.shenkar.com.sqlproject.MyConstant;
 import dima.liza.mobile.shenkar.com.sqlproject.grade.Grade;
 import dima.liza.mobile.shenkar.com.sqlproject.R;
 import dima.liza.mobile.shenkar.com.sqlproject.SQL.DataAccess;
@@ -25,16 +27,6 @@ import dima.liza.mobile.shenkar.com.sqlproject.grade.StudentGrade;
 import dima.liza.mobile.shenkar.com.sqlproject.grade.StudentGradeAdapter;
 
 public class MainActivity extends AppCompatActivity {
-    final int REQUEST_ADD_STUDENT = 1;
-    final int REQUEST_ADD_LECTURE = 2;
-    final int REQUEST_ADD_COURSE = 3;
-    final int REQUEST_ADD_GRADE = 4;
-    final int REQUEST_EDIT_STUDENT = 5;
-    final int REQUEST_EDIT_LECTURE = 6;
-    final int REQUEST_EDIT_COURSE = 7;
-    final int REQUEST_EDIT_GRADE = 8;
-    final int MODE_CREATE = 1;
-    final int MODE_EDIT = 2;
     String TAG  = "MainActivity";
     ListView listView;
     DataAccess dataAccess;
@@ -55,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "onActivityResult start");
         switch (requestCode){
-            case REQUEST_ADD_STUDENT:{
+            case MyConstant.ConstantEntry.REQUEST_ADD_STUDENT:{
                 if(resultCode== Activity.RESULT_OK){
                     String strStudentId  = data.getStringExtra("studentId");
                     int studentId  = Integer.parseInt(strStudentId);
@@ -73,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             }
-            case REQUEST_ADD_LECTURE:{
+            case MyConstant.ConstantEntry.REQUEST_ADD_LECTURE:{
                 if(resultCode== Activity.RESULT_OK){
                     String strLectureId  = data.getStringExtra("lectureId");
                     int lectureId  = Integer.parseInt(strLectureId);
@@ -90,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             }
-            case REQUEST_ADD_COURSE:{
+            case MyConstant.ConstantEntry.REQUEST_ADD_COURSE:{
                 if(resultCode== Activity.RESULT_OK){
                     String strCourseId  = data.getStringExtra("courseId");
                     int courseId  = Integer.parseInt(strCourseId);
@@ -110,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             }
-            case REQUEST_ADD_GRADE:{
+            case MyConstant.ConstantEntry.REQUEST_ADD_GRADE:{
                 if(resultCode== Activity.RESULT_OK){
                     String stStudentId  = data.getStringExtra("studentId");
                     int studentId  = Integer.parseInt(stStudentId);
@@ -124,6 +116,23 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(this,"Grade not add to data base,try again",Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
+            }
+            case MyConstant.ConstantEntry.REQUEST_EDIT_LECTURE:{
+                if(resultCode== Activity.RESULT_OK){
+                    String strLectureId  = data.getStringExtra("lectureId");
+                    int lectureId  = Integer.parseInt(strLectureId);
+                    String lectureFirstName =  data.getStringExtra("lectureFirstName");
+                    String lectureLastName =   data.getStringExtra("lectureLastName");
+                    String lectureAddress =  data.getStringExtra("lectureAddress");
+                    Lecture newLecture = new Lecture(lectureId,lectureFirstName,lectureLastName,lectureAddress);
+                    if(dataAccess.editLecture(newLecture)){
+                        Toast.makeText(this,"Lecture edit successfully",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(this,"Lecture edit fail.No lecture with such id",Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
@@ -159,20 +168,20 @@ public class MainActivity extends AppCompatActivity {
             }
             case R.id.buttonAddStudent:{
                 Log.i(TAG, "buttonAddStudent click");
-                Intent intent = new Intent(this,AddStudentActivity.class);
-                intent.putExtra("mode",MODE_CREATE);
+                Intent intent = new Intent(this,AddAndEditStudentActivity.class);
+                intent.putExtra("mode",MyConstant.ConstantEntry.MODE_CREATE);
                 String studentId = editTextStudentId.getText().toString();
                 if (studentId.equals("")) {
                     studentId = "NO_STUDENT_ID";
                 }
                 intent.putExtra("studentId", studentId);
-                startActivityForResult(intent, REQUEST_ADD_STUDENT);
+                startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_ADD_STUDENT);
                 break;
             }
             case R.id.buttonAddCourse:{
                 Log.i(TAG,"buttonAddCourse click");
-                Intent intent = new Intent(this,AddCourseActivity.class);
-                intent.putExtra("mode",MODE_CREATE);
+                Intent intent = new Intent(this,AddAndEditCourseActivity.class);
+                intent.putExtra("mode",MyConstant.ConstantEntry.MODE_CREATE);
                 String lectureId = editTextLectureId.getText().toString();
                 if (lectureId.equals("")) {
                     lectureId = "NO_LECTURE_ID";
@@ -183,25 +192,25 @@ public class MainActivity extends AppCompatActivity {
                     courseId = "NO_COURSE_ID";
                 }
                 intent.putExtra("courseId",courseId);
-                startActivityForResult(intent, REQUEST_ADD_COURSE);
+                startActivityForResult(intent,MyConstant.ConstantEntry.REQUEST_ADD_COURSE);
                 break;
             }
             case R.id.buttonAddLecture:{
                 Log.i(TAG,"buttonAddLecture click");
-                Intent intent = new Intent(this,AddLectureActivity.class);
-                intent.putExtra("mode",MODE_CREATE);
+                Intent intent = new Intent(this,AddAndEditLectureActivity.class);
+                intent.putExtra("mode",MyConstant.ConstantEntry.MODE_CREATE);
                 String lectureId = editTextLectureId.getText().toString();
                 if (lectureId.equals("")) {
                     lectureId = "NO_LECTURE_ID";
                 }
                 intent.putExtra("lectureId", lectureId);
-                startActivityForResult(intent, REQUEST_ADD_LECTURE);
+                startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_ADD_LECTURE);
                 break;
             }
             case R.id.buttonAddGrade:{
                 Log.i(TAG,"buttonAddGrade click");
-                Intent intent = new Intent(this,AddGradeActivity.class);
-                intent.putExtra("mode",MODE_CREATE);
+                Intent intent = new Intent(this,AddAndEditGradeActivity.class);
+                intent.putExtra("mode",MyConstant.ConstantEntry.MODE_CREATE);
                 String studentId = editTextStudentId.getText().toString();
                 if (studentId.equals("")) {
                     studentId = "NO_STUDENT_ID";
@@ -212,12 +221,12 @@ public class MainActivity extends AppCompatActivity {
                     courseId = "NO_COURSE_ID";
                 }
                 intent.putExtra("courseId", courseId);
-                startActivityForResult(intent, REQUEST_ADD_GRADE);
+                startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_ADD_GRADE);
 
                 break;
             }
             case R.id.buttonRemoveCourse:{
-                Log.i(TAG,"buttonRemoveCourse click");
+                Log.i(TAG, "buttonRemoveCourse click");
                 try {
                     int courseId = Integer.parseInt(editTextCourseId.getText().toString());
                     if(dataAccess.removeCourse(courseId)){
@@ -247,11 +256,11 @@ public class MainActivity extends AppCompatActivity {
                 catch(NumberFormatException e){
                     Toast.makeText(this,"illegally student or course id",Toast.LENGTH_LONG).show();
                 }
-                Log.i(TAG,"buttonRemoveGrade click");
+                Log.i(TAG, "buttonRemoveGrade click");
                 break;
             }
             case R.id.buttonRemoveLecture:{
-                Log.i(TAG,"buttonRemoveLecture click");
+                Log.i(TAG, "buttonRemoveLecture click");
                 try {
                     int lectureId = Integer.parseInt(editTextLectureId.getText().toString());
                     if(dataAccess.removeLecture(lectureId)){
@@ -268,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
             case R.id.buttonRemoveStudent:{
-                Log.i(TAG,"buttonRemoveStudent click");
+                Log.i(TAG, "buttonRemoveStudent click");
                 try {
                     int studentId = Integer.parseInt(editTextStudentId.getText().toString());
                     if(dataAccess.removeStudent(studentId)){
@@ -285,42 +294,56 @@ public class MainActivity extends AppCompatActivity {
             }
             case R.id.buttonEditGrade:{
                 Log.i(TAG, "buttonEditGrade click");
-                Intent intent = new Intent(this,AddGradeActivity.class);
-                intent.putExtra("mode",MODE_EDIT);
+
+                Intent intent = new Intent(this,AddAndEditGradeActivity.class);
+                intent.putExtra("mode",MyConstant.ConstantEntry.MODE_EDIT);
 
 
 
-                startActivityForResult(intent, REQUEST_EDIT_GRADE);
+                startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_EDIT_GRADE);
                 break;
             }
             case R.id.buttonEditLecture:{
-                Log.i(TAG,"buttonEditLecture click");
-                Intent intent = new Intent(this,AddLectureActivity.class);
-                intent.putExtra("mode",MODE_EDIT);
+                Log.i(TAG, "buttonEditLecture click");
+                Intent intent = new Intent(this,AddAndEditLectureActivity.class);
+                intent.putExtra("mode", MyConstant.ConstantEntry.MODE_EDIT);
 
-
-
-                startActivityForResult(intent, REQUEST_EDIT_LECTURE);
+                String lectureId = editTextLectureId.getText().toString();
+                if(lectureId.equals("")){
+                    Toast.makeText(this,"Id lecture field is empty",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Lecture lecture = dataAccess.getLectureById(lectureId);
+                if(lecture==null){
+                    Toast.makeText(this,"No such lecture in data base",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                intent.putExtra(MyConstant.ConstantEntry.MODE,MyConstant.ConstantEntry.MODE_EDIT);
+                intent.putExtra("lectureId",Integer.toString(lecture.getLectureId()));
+                intent.putExtra("lectureFirstName",lecture.getFirstName());
+                intent.putExtra("lectureLastName",lecture.getLastName());
+                intent.putExtra("lectureAddress",lecture.getAddress());
+                startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_EDIT_LECTURE);
                 break;
             }
             case R.id.buttonEditCourse:{
                 Log.i(TAG,"buttonEditCourse click");
-                Intent intent = new Intent(this,AddCourseActivity.class);
-                intent.putExtra("mode",MODE_EDIT);
+                Intent intent = new Intent(this,AddAndEditCourseActivity.class);
+                intent.putExtra("mode",MyConstant.ConstantEntry.MODE_EDIT);
 
 
 
-                startActivityForResult(intent, REQUEST_EDIT_COURSE);
+                startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_EDIT_COURSE);
                 break;
             }
             case R.id.buttonEditStudent:{
                 Log.i(TAG,"buttonEditStudent click");
-                Intent intent = new Intent(this,AddStudentActivity.class);
-                intent.putExtra("mode",MODE_EDIT);
+                Intent intent = new Intent(this,AddAndEditStudentActivity.class);
+                intent.putExtra("mode",MyConstant.ConstantEntry.MODE_EDIT);
 
 
 
-                startActivityForResult(intent, REQUEST_EDIT_STUDENT);
+                startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_EDIT_STUDENT);
                 break;
             }
             case R.id.buttonShowGradesOfStudent:{
@@ -336,7 +359,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
             case R.id.buttonBottom3Students:{
-                Log.i(TAG,"buttonBottom3Students click");
+                Log.i(TAG, "buttonBottom3Students click");
                 break;
             }
             default:{

@@ -8,10 +8,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import dima.liza.mobile.shenkar.com.sqlproject.MyConstant;
 import dima.liza.mobile.shenkar.com.sqlproject.R;
 import dima.liza.mobile.shenkar.com.sqlproject.SQL.DataAccess;
 
-public class AddGradeActivity extends AppCompatActivity {
+public class AddAndEditGradeActivity extends AppCompatActivity {
     EditText editTextCourseId;
     EditText editTextStudentId;
     EditText editTextGrade;
@@ -19,18 +20,23 @@ public class AddGradeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_grade);
+        setContentView(R.layout.activity_add_and_edit_grade);
          editTextCourseId = (EditText) findViewById(R.id.editTextAddGradeCourseId);
          editTextStudentId =  (EditText) findViewById(R.id.editTextAddGradeStudentId);
          editTextGrade = (EditText)findViewById(R.id.editTexdAddGradeGrade);
         Intent intent = getIntent();
-        String inputCourseId = intent.getStringExtra("courseId");
-        if(!inputCourseId.equals("NO_COURSE_ID")){
-            editTextCourseId.setText(inputCourseId);
+        if(intent.getIntExtra(MyConstant.ConstantEntry.MODE,MyConstant.ConstantEntry.MODE_CREATE) == MyConstant.ConstantEntry.MODE_CREATE) {
+            String inputCourseId = intent.getStringExtra("courseId");
+            if (!inputCourseId.equals("NO_COURSE_ID")) {
+                editTextCourseId.setText(inputCourseId);
+            }
+            String inputStudentId = intent.getStringExtra("studentId");
+            if (!inputStudentId.equals("NO_STUDENT_ID")) {
+                editTextStudentId.setText(inputStudentId);
+            }
         }
-        String inputStudentId = intent.getStringExtra("studentId");
-        if(!inputStudentId.equals("NO_STUDENT_ID")){
-            editTextStudentId.setText(inputStudentId);
+        else{
+            //todo
         }
     }
 

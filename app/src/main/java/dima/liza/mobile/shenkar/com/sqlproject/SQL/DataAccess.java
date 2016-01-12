@@ -414,7 +414,7 @@ public class DataAccess implements  iDataAccess {
             Log.d(TAG,sqlSelect+ selectionArgs[0]);
             Cursor cursor =  database.rawQuery(sqlSelect,selectionArgs);
             cursor.moveToFirst();
-            Log.d(TAG," cursor.getCount():"+ cursor.getCount());
+            Log.d(TAG, " cursor.getCount():" + cursor.getCount());
             if(cursor.getCount()!=1){
                 Log.d(TAG, "Error!! more than 1 course with id or no such course:"+courseId + " cursor.getCount():"+cursor.getCount());
                 return null;
@@ -493,6 +493,49 @@ public class DataAccess implements  iDataAccess {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean editLecture(Lecture lecture) {
+        //public int update (String table, ContentValues values, String whereClause, String[] whereArgs)
+        ContentValues values = new ContentValues();
+        String whereClauseLecture = DbContract.LectureEntry.COLUMN_LECTURE_ID + " = ? ";
+        String whereArgs[] = new String[1];
+        whereArgs[0] = Integer.toString(lecture.getLectureId());
+        values.put(DbContract.LectureEntry.COLUMN_FIRST_NAME,lecture.getFirstName());
+        values.put(DbContract.LectureEntry.COLUMN_LAST_NAME,lecture.getLastName());
+        values.put(DbContract.LectureEntry.COLUMN_ADDRESS,lecture.getAddress());
+        database = dbHelper.getReadableDatabase();
+        database.beginTransaction();
+        try {
+            if(database.update(DbContract.LectureEntry.TABLE_NAME,values,whereClauseLecture,whereArgs)!=1){
+                return false;
+            }
+            database.setTransactionSuccessful();
+            return true;
+        }
+        catch(Exception e){
+            Log.e(TAG,"Exception!",e);
+            return false;
+        }
+        finally {
+            database.endTransaction();
+        }
+    }
+
+    @Override
+    public boolean editStudent(Student student) {
+        return false;
+    }
+
+    @Override
+    public boolean editCourse(Course course) {
+        return false;
+    }
+
+    @Override
+    public boolean editGrade(Grade grade) {
+        return false;
     }
 
     private StudentGrade getStudentGradesFromCursor(Cursor cursor) {

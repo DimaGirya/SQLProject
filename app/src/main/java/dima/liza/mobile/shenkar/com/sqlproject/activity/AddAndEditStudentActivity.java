@@ -8,10 +8,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import dima.liza.mobile.shenkar.com.sqlproject.MyConstant;
 import dima.liza.mobile.shenkar.com.sqlproject.R;
 import dima.liza.mobile.shenkar.com.sqlproject.SQL.DataAccess;
 
-public class AddStudentActivity extends AppCompatActivity {
+public class AddAndEditStudentActivity extends AppCompatActivity {
     EditText editTextStudentId;
     EditText editTextStudentFirsName;
     EditText editTextStudentLastName;
@@ -21,16 +22,21 @@ public class AddStudentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_student);
+        setContentView(R.layout.activity_add_and_edit_student);
         editTextStudentId = (EditText)findViewById(R.id.editTextAddStudentId);
         editTextStudentFirsName = (EditText)findViewById(R.id.editTextAddStudentFirstName);
         editTextStudentLastName = (EditText)findViewById(R.id.editTextAddStudentLastName);
         editTextStudentAddress = (EditText)findViewById(R.id.editTextAddStudentAddress) ;
         editTextDateOfBirthday = (EditText)findViewById(R.id.editTextStudentDateOfBirhday);
         Intent intent = getIntent();
-        String inputStudentId = intent.getStringExtra("studentId");
-        if(!inputStudentId.equals("NO_STUDENT_ID")){
-            editTextStudentId.setText(inputStudentId);
+        if(intent.getIntExtra(MyConstant.ConstantEntry.MODE,MyConstant.ConstantEntry.MODE_CREATE) == MyConstant.ConstantEntry.MODE_CREATE) {
+            String inputStudentId = intent.getStringExtra("studentId");
+            if (!inputStudentId.equals("NO_STUDENT_ID")) {
+                editTextStudentId.setText(inputStudentId);
+            }
+        }
+        else{
+            //todo
         }
     }
 

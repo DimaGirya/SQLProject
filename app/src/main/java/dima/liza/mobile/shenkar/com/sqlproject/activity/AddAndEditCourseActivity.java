@@ -8,29 +8,35 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import dima.liza.mobile.shenkar.com.sqlproject.MyConstant;
 import dima.liza.mobile.shenkar.com.sqlproject.R;
 import dima.liza.mobile.shenkar.com.sqlproject.SQL.DataAccess;
 
-public class AddCourseActivity extends AppCompatActivity {
+public class AddAndEditCourseActivity extends AppCompatActivity {
     EditText editTextCourseId,editTextCourseName,editTextCourseSemester,editTextCourseYear,editTextLectureId;
     DataAccess dataAccess;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_course);
+        setContentView(R.layout.activity_add_and_edit_course);
         editTextCourseId = (EditText)findViewById(R.id.editTextCourseId);
         editTextCourseName = (EditText)findViewById(R.id.editTextCourseName);
         editTextCourseSemester  = (EditText)findViewById(R.id.editTextCourseSemester);
         editTextCourseYear = (EditText)findViewById(R.id.editTextCourseYear);
         editTextLectureId = (EditText)findViewById(R.id.editTextCourseLectureId);
         Intent intent = getIntent();
-        String inputLectureId = intent.getStringExtra("lectureId");
-        if(!inputLectureId.equals("NO_LECTURE_ID")){
-            editTextLectureId.setText(inputLectureId);
+        if(intent.getIntExtra(MyConstant.ConstantEntry.MODE,MyConstant.ConstantEntry.MODE_CREATE) == MyConstant.ConstantEntry.MODE_CREATE) {
+            String inputLectureId = intent.getStringExtra("lectureId");
+            if (!inputLectureId.equals("NO_LECTURE_ID")) {
+                editTextLectureId.setText(inputLectureId);
+            }
+            String inputCourseId = intent.getStringExtra("courseId");
+            if (!inputCourseId.equals("NO_COURSE_ID")) {
+                editTextCourseId.setText(inputCourseId);
+            }
         }
-        String inputCourseId = intent.getStringExtra("courseId");
-        if(!inputCourseId.equals("NO_COURSE_ID")){
-            editTextCourseId.setText(inputCourseId);
+        else{
+            // todo
         }
     }
 
