@@ -36,11 +36,27 @@ public class AddAndEditCourseActivity extends AppCompatActivity {
             }
         }
         else{
-            // todo
+            editTextCourseId.setText(intent.getStringExtra("courseId"));
+            editTextCourseName.setText(intent.getStringExtra("courseName"));
+            editTextCourseSemester.setText(intent.getStringExtra("courseSemester"));
+            editTextLectureId.setText(intent.getStringExtra("courseLectureId"));
+            editTextCourseYear.setText(intent.getStringExtra("courseYear"));
         }
+
     }
 
-    public void onClickButtonAddCourse(View view) {
+    public void onClickButtonAddOrEditCourse(View view) {
+        int flag = 0;
+        switch (view.getId()){
+            case R.id.buttonAddCourse:{
+                flag = 1;
+                break;
+            }
+            case R.id.buttonEditCourse:{
+                flag = 2;
+                break;
+            }
+        }
         dataAccess = DataAccess.getInstatnce(this);
         String courseId = editTextCourseId.getText().toString();
         String curseName = editTextCourseName.getText().toString();
@@ -51,9 +67,11 @@ public class AddAndEditCourseActivity extends AppCompatActivity {
             Toast.makeText(this, "You need to input a course ID", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(dataAccess.getCourseById(courseId)!=null){
-            Toast.makeText(this, "The date base has a course  with this ID.Additions impossible", Toast.LENGTH_SHORT).show();
-            return;
+        if(flag==1){
+             if(dataAccess.getCourseById(courseId)!=null){
+                   Toast.makeText(this, "The date base has a course  with this ID.Additions impossible", Toast.LENGTH_SHORT).show();
+                  return;
+              }
         }
         if (curseName.equals("")) {
             Toast.makeText(this, "You need to input a course first name", Toast.LENGTH_SHORT).show();
@@ -68,13 +86,16 @@ public class AddAndEditCourseActivity extends AppCompatActivity {
             Toast.makeText(this, "You need to input a course year", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (lectureId.equals("")) {
-            Toast.makeText(this, "You add course without  lecture", Toast.LENGTH_SHORT).show();
-            lectureId = "-1";
+
+        if(flag==1) {
+            if (dataAccess.getLectureById(lectureId) == null) {
+                Toast.makeText(this, "No such lecture in data base", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
-        else if(dataAccess.getLectureById(lectureId)==null){
-            Toast.makeText(this, "No such lecture in data base", Toast.LENGTH_SHORT).show();
-            return;
+        if (lectureId.equals("")) {
+            Toast.makeText(this, "You add/edit course without  lecture", Toast.LENGTH_SHORT).show();
+            lectureId = "-1";
         }
         Intent returnIntent = new Intent();
         returnIntent.putExtra("courseId", courseId);
@@ -86,7 +107,4 @@ public class AddAndEditCourseActivity extends AppCompatActivity {
         finish();
     }
 
-    public void onClickEditCourse(View view) {
-
-    }
 }

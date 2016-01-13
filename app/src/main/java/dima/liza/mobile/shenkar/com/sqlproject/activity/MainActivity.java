@@ -137,6 +137,33 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             }
+            case MyConstant.ConstantEntry.REQUEST_EDIT_COURSE:{
+            /*
+                   returnIntent.putExtra("courseId", courseId);
+        returnIntent.putExtra("courseName",curseName);
+        returnIntent.putExtra("courseSemester", curseSemester);
+        returnIntent.putExtra("courseYear",curseYear);
+        returnIntent.putExtra("lectureId", lectureId);
+             */
+                if(resultCode== Activity.RESULT_OK){
+                    String strCourseId  = data.getStringExtra("courseId");
+                    int courseId  = Integer.parseInt(strCourseId);
+                    String courseName =  data.getStringExtra("courseName");
+                    String courseSemester =   data.getStringExtra("courseSemester");
+                    String strCourseYear =  data.getStringExtra("courseYear");
+                    String strLectureId =  data.getStringExtra("lectureId");;
+                    int courseYear  = Integer.parseInt(strCourseYear);
+                    int lectureId  = Integer.parseInt(strLectureId);
+                    Course course = new Course(courseId,courseName,courseSemester,courseYear,lectureId);
+                    if(dataAccess.editCourse(course)){
+                        Toast.makeText(this,"Course edit successfully",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(this,"Course edit fail.No course with such id",Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
+            }
         }
 
     }
@@ -296,7 +323,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "buttonEditGrade click");
 
                 Intent intent = new Intent(this,AddAndEditGradeActivity.class);
-                intent.putExtra("mode",MyConstant.ConstantEntry.MODE_EDIT);
+                intent.putExtra(MyConstant.ConstantEntry.MODE,MyConstant.ConstantEntry.MODE_EDIT);
 
 
 
@@ -306,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.buttonEditLecture:{
                 Log.i(TAG, "buttonEditLecture click");
                 Intent intent = new Intent(this,AddAndEditLectureActivity.class);
-                intent.putExtra("mode", MyConstant.ConstantEntry.MODE_EDIT);
+                intent.putExtra(MyConstant.ConstantEntry.MODE, MyConstant.ConstantEntry.MODE_EDIT);
 
                 String lectureId = editTextLectureId.getText().toString();
                 if(lectureId.equals("")){
@@ -329,17 +356,32 @@ public class MainActivity extends AppCompatActivity {
             case R.id.buttonEditCourse:{
                 Log.i(TAG,"buttonEditCourse click");
                 Intent intent = new Intent(this,AddAndEditCourseActivity.class);
-                intent.putExtra("mode",MyConstant.ConstantEntry.MODE_EDIT);
+                intent.putExtra(MyConstant.ConstantEntry.MODE,MyConstant.ConstantEntry.MODE_EDIT);
 
 
-
+                String courseId = editTextCourseId.getText().toString();
+                if(courseId.equals("")){
+                    Toast.makeText(this,"Id course field is empty",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Course course = dataAccess.getCourseById(courseId);
+                if(course==null){
+                    Toast.makeText(this,"No such course in data base",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                intent.putExtra(MyConstant.ConstantEntry.MODE,MyConstant.ConstantEntry.MODE_EDIT);
+                intent.putExtra("courseId",Integer.toString(course.getCourseId()));
+                intent.putExtra("courseName",course.getCourseName());
+                intent.putExtra("courseSemester", course.getSemester());
+                intent.putExtra("courseLectureId",Integer.toString(course.getLectureId()));
+                intent.putExtra("courseYear",Integer.toString(course.getYear()));
                 startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_EDIT_COURSE);
                 break;
             }
             case R.id.buttonEditStudent:{
                 Log.i(TAG,"buttonEditStudent click");
                 Intent intent = new Intent(this,AddAndEditStudentActivity.class);
-                intent.putExtra("mode",MyConstant.ConstantEntry.MODE_EDIT);
+                intent.putExtra(MyConstant.ConstantEntry.MODE,MyConstant.ConstantEntry.MODE_EDIT);
 
 
 

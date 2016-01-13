@@ -54,7 +54,9 @@ public class DataAccess implements  iDataAccess {
         try {
             database = dbHelper.getReadableDatabase();
             List<Student> studentList = new ArrayList<Student>();
-
+            Log.i(TAG,"SELECT FROM "+DbContract.StudentEntry.TABLE_NAME + " "
+                    + studentColumns[0] + "," + studentColumns[1] + ","
+                    + studentColumns[2] + "," + studentColumns[3] +  "," +  studentColumns[4] + ";");
             Cursor cursor = database.query(DbContract.StudentEntry.TABLE_NAME, studentColumns, null, null, null, null, null);
 
             cursor.moveToFirst();
@@ -93,7 +95,9 @@ public class DataAccess implements  iDataAccess {
         try {
             database = dbHelper.getReadableDatabase();
             List<Course> courseList = new ArrayList<Course>();
-
+            Log.i(TAG,"SELECT FROM "+DbContract.LectureEntry.TABLE_NAME + " "
+                    + lectureColumns[0] + "," + lectureColumns[1] + ","
+                    + lectureColumns[2] + "," + lectureColumns[3] + ";");
             Cursor cursor = database.query(DbContract.CourseEntry.TABLE_NAME, courseColumns, null, null, null, null, null);
 
             cursor.moveToFirst();
@@ -130,7 +134,9 @@ public class DataAccess implements  iDataAccess {
         try {
             database = dbHelper.getReadableDatabase();
             List<Lecture> lectureList = new ArrayList<Lecture>();
-
+            Log.i(TAG,"SELECT FROM "+DbContract.CourseEntry.TABLE_NAME + " "
+                    + courseColumns[0] + "," + courseColumns[1] + ","
+                    + courseColumns[2] + "," + courseColumns[3] +  "," +  courseColumns[4] + ";");
             Cursor cursor = database.query(DbContract.LectureEntry.TABLE_NAME, lectureColumns, null, null, null, null, null);
 
             cursor.moveToFirst();
@@ -474,7 +480,7 @@ public class DataAccess implements  iDataAccess {
                     + " WHERE " + DbContract.LectureEntry.COLUMN_LECTURE_ID + "= ?" ;
             String  selectionArgs[] = new String[1];
             selectionArgs[0] = lectureId;
-            Log.d(TAG,sqlSelect);
+            Log.d(TAG,sqlSelect + " ?=" + selectionArgs[0]);
             Cursor cursor =  database.rawQuery(sqlSelect,selectionArgs);
             cursor.moveToFirst();
             if(cursor.getCount()!=1){
@@ -504,7 +510,12 @@ public class DataAccess implements  iDataAccess {
         whereArgs[0] = Integer.toString(lecture.getLectureId());
         values.put(DbContract.LectureEntry.COLUMN_FIRST_NAME,lecture.getFirstName());
         values.put(DbContract.LectureEntry.COLUMN_LAST_NAME,lecture.getLastName());
-        values.put(DbContract.LectureEntry.COLUMN_ADDRESS,lecture.getAddress());
+        values.put(DbContract.LectureEntry.COLUMN_ADDRESS, lecture.getAddress());
+        Log.i(TAG, "UPDATE " + DbContract.LectureEntry.TABLE_NAME + " SET "
+                + DbContract.LectureEntry.COLUMN_FIRST_NAME + "=" +lecture.getFirstName() + ","
+                + DbContract.LectureEntry.COLUMN_LAST_NAME + "=" +lecture.getLastName() + ","
+                + DbContract.LectureEntry.COLUMN_ADDRESS + "=" +lecture.getAddress()
+                + " WHERE " + DbContract.LectureEntry.COLUMN_LECTURE_ID + " = " +   whereArgs[0]+ ";");
         database = dbHelper.getReadableDatabase();
         database.beginTransaction();
         try {
@@ -530,7 +541,42 @@ public class DataAccess implements  iDataAccess {
 
     @Override
     public boolean editCourse(Course course) {
-        return false;
+        ContentValues values = new ContentValues();
+        String whereClauseLecture = DbContract.CourseEntry.COLUMN_COURSE_ID + " = ? ";
+        String whereArgs[] = new String[1];
+        whereArgs[0] = Integer.toString(course.getCourseId());
+
+        /*
+        values.put(DbContract.LectureEntry.COLUMN_FIRST_NAME,lecture.getFirstName());
+        values.put(DbContract.LectureEntry.COLUMN_LAST_NAME,lecture.getLastName());
+        values.put(DbContract.LectureEntry.COLUMN_ADDRESS,lecture.getAddress());
+        */
+        values.put(DbContract.CourseEntry.COLUMN_COURSE_NAME,course.getCourseName());
+        values.put(DbContract.CourseEntry.COLUMN_YEAR,course.getYear());
+        values.put(DbContract.CourseEntry.COLUMN_SEMESTER,course.getSemester());
+        values.put(DbContract.CourseEntry.COLUMN_LECTURE_ID,course.getLectureId());
+        database = dbHelper.getReadableDatabase();
+        database.beginTransaction();
+        try {
+            Log.i(TAG, "UPDATE " + DbContract.CourseEntry.TABLE_NAME + " SET "
+                    + DbContract.CourseEntry.COLUMN_COURSE_NAME + "=" + course.getCourseName() + ","
+                    + DbContract.CourseEntry.COLUMN_YEAR + "=" + course.getYear() + ","
+                    + DbContract.CourseEntry.COLUMN_SEMESTER + "=" + course.getSemester() + ","
+                    + DbContract.CourseEntry.COLUMN_LECTURE_ID + "=" + course.getLectureId() + ","
+                    + " WHERE " + DbContract.CourseEntry.COLUMN_COURSE_ID + " = " +   whereArgs[0]+ ";");
+            if(database.update(DbContract.CourseEntry.TABLE_NAME,values,whereClauseLecture,whereArgs)!=1){
+                return false;
+            }
+            database.setTransactionSuccessful();
+            return true;
+        }
+        catch(Exception e){
+            Log.e(TAG,"Exception!",e);
+            return false;
+        }
+        finally {
+            database.endTransaction();
+        }
     }
 
     @Override
