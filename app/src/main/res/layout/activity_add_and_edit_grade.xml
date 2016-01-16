@@ -12,7 +12,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Student Id"
+        android:hint="@string/studentIdfield"
         android:id="@+id/editTextAddGradeStudentId"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -41,8 +41,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClickButtonAddGrade"
-        android:text="Add Grade"
+        android:onClick="onClickButtonAddOrEditGrade"
+        android:text="@string/buttonAddGrade"
         android:id="@+id/buttonAddGrade"
         android:layout_below="@+id/editTexdAddGradeGrade" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonEditGrade"
+        android:onClick="onClickButtonAddOrEditGrade"
+        android:id="@+id/buttonEditGrade"
+        android:layout_below="@+id/buttonAddGrade"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

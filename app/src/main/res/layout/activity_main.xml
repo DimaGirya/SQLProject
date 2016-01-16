@@ -193,6 +193,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClickButton"
         android:text="@string/botomStudent"
         android:id="@+id/buttonBottom3Students"
         android:layout_above="@+id/editTextStudentId"

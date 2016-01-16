@@ -15,6 +15,8 @@ public class MyConstant {
         public static final int REQUEST_EDIT_GRADE = 8;
         public static final int MODE_CREATE = 1;
         public static final int MODE_EDIT = 2;
+        public static final int TOP = 1;
+        public static final int BOTTOM = 2;
         public static final String MODE = "MODE";
     }
 }

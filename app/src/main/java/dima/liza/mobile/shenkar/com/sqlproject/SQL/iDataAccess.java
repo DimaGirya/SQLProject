@@ -32,9 +32,14 @@ public interface iDataAccess {
     Course getCourseById(String courseId);
     Student getStudentById(String studentId);
     Lecture getLectureById(String lectureId);
+    Grade getGradeById(String courseId, String studentId);
 
     boolean editLecture(Lecture lecture);
     boolean editStudent(Student student);
     boolean editCourse(Course course);
     boolean editGrade(Grade grade);
+
+    List<StudentGrade> getTopOrBottomStudent(String courseId, int topOrBottom);
+
+
 }

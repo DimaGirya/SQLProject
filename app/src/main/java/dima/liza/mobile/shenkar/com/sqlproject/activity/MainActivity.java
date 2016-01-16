@@ -138,13 +138,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
             case MyConstant.ConstantEntry.REQUEST_EDIT_COURSE:{
-            /*
-                   returnIntent.putExtra("courseId", courseId);
-        returnIntent.putExtra("courseName",curseName);
-        returnIntent.putExtra("courseSemester", curseSemester);
-        returnIntent.putExtra("courseYear",curseYear);
-        returnIntent.putExtra("lectureId", lectureId);
-             */
                 if(resultCode== Activity.RESULT_OK){
                     String strCourseId  = data.getStringExtra("courseId");
                     int courseId  = Integer.parseInt(strCourseId);
@@ -160,6 +153,43 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(this,"Course edit fail.No course with such id",Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
+            }
+            case MyConstant.ConstantEntry.REQUEST_EDIT_STUDENT:{
+                if(resultCode== Activity.RESULT_OK){
+
+                    String strStudentId  = data.getStringExtra("studentId");
+                    int studentId  = Integer.parseInt(strStudentId);
+                    String studentFirstName =  data.getStringExtra("studentFirstName");
+                    String studentLastName =   data.getStringExtra("studentLastName");
+                    String studentAddress =  data.getStringExtra("studentAddress");
+                    String studentDateOfBirthday =   data.getStringExtra("studentDateOfBirthday");
+                    Student student = new Student(studentId,studentFirstName,studentLastName,studentAddress,studentDateOfBirthday);
+                    if(dataAccess.editStudent(student)){
+                        Toast.makeText(this,"Student edit successfully",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(this,"Student edit fail.No Student with such id",Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
+            }
+            case MyConstant.ConstantEntry.REQUEST_EDIT_GRADE:{
+                if(resultCode== Activity.RESULT_OK){
+                    String stStudentId  = data.getStringExtra("studentId");
+                    int studentId  = Integer.parseInt(stStudentId);
+                    String stCourseId  = data.getStringExtra("courseId");
+                    int courseId  = Integer.parseInt(stCourseId);
+                    String strGrade  = data.getStringExtra("grade");
+                    int grade  = Integer.parseInt(strGrade);
+                    Grade gradeEdit = new Grade(studentId,courseId,grade);
+                    if(dataAccess.editGrade(gradeEdit)){
+                        Toast.makeText(this,"Grade edit successfully",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(this,"Grade edit fail.No such  grade in data base",Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
@@ -325,7 +355,24 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this,AddAndEditGradeActivity.class);
                 intent.putExtra(MyConstant.ConstantEntry.MODE,MyConstant.ConstantEntry.MODE_EDIT);
 
-
+                String courseId  = editTextCourseId.getText().toString();
+                if(courseId.equals("")){
+                    Toast.makeText(this,"Id course field is empty",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                String studentId = editTextStudentId.getText().toString();
+                if(studentId.equals("")){
+                    Toast.makeText(this,"Id course field is empty",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Grade grade = dataAccess.getGradeById(courseId,studentId);
+                if(grade==null){
+                    Toast.makeText(this,"No such grade in data base",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                intent.putExtra("studentId",Integer.toString(grade.getStudentId()));
+                intent.putExtra("courseId",Integer.toString(grade.getCourseId()));
+                intent.putExtra("grade",Integer.toString(grade.getGrade()));
 
                 startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_EDIT_GRADE);
                 break;
@@ -383,7 +430,23 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this,AddAndEditStudentActivity.class);
                 intent.putExtra(MyConstant.ConstantEntry.MODE,MyConstant.ConstantEntry.MODE_EDIT);
 
+                String studentId = editTextStudentId.getText().toString();
+                if(studentId.equals("")){
+                    Toast.makeText(this,"Id student field is empty",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Student student = dataAccess.getStudentById(studentId);
+                if(student==null){
+                    Toast.makeText(this,"No such student in data base",Toast.LENGTH_LONG).show();
+                    return;
+                }
 
+                intent.putExtra(MyConstant.ConstantEntry.MODE,MyConstant.ConstantEntry.MODE_EDIT);
+                intent.putExtra("studentId",Integer.toString(student.getStudentId()));
+                intent.putExtra("firstName",student.getFirstName());
+                intent.putExtra("lastName", student.getLastName());
+                intent.putExtra("address",student.getAddress());
+                intent.putExtra("dateOfBirth", student.getDateOfBirth());
 
                 startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_EDIT_STUDENT);
                 break;
@@ -398,10 +461,18 @@ public class MainActivity extends AppCompatActivity {
             }
             case R.id.buttonTop3Students:{
                 Log.i(TAG,"buttonTop3Students click");
+                String courseId = editTextCourseId.getText().toString();
+                List<StudentGrade> studentGrade = dataAccess.getTopOrBottomStudent(courseId, MyConstant.ConstantEntry.TOP);
+                StudentGradeAdapter studentGradeAdapter = new StudentGradeAdapter(this,studentGrade);
+                listView.setAdapter(studentGradeAdapter);
                 break;
             }
             case R.id.buttonBottom3Students:{
                 Log.i(TAG, "buttonBottom3Students click");
+                String courseId = editTextCourseId.getText().toString();
+                List<StudentGrade> studentGrade = dataAccess.getTopOrBottomStudent(courseId, MyConstant.ConstantEntry.BOTTOM);
+                StudentGradeAdapter studentGradeAdapter = new StudentGradeAdapter(this,studentGrade);
+                listView.setAdapter(studentGradeAdapter);
                 break;
             }
             default:{

@@ -68,8 +68,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add student"
-        android:onClick="onClickAddStudent"
+        android:onClick="onClickAddOrEditStudent"
         android:id="@+id/buttonAddStudentActivity"
         android:layout_below="@+id/editTextStudentDateOfBirhday"
-        android:layout_toRightOf="@+id/editTextStudentDateOfBirhday" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit student"
+        android:onClick="onClickAddOrEditStudent"
+        android:id="@+id/buttonEditStudent"
+        android:layout_below="@+id/buttonAddStudentActivity"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

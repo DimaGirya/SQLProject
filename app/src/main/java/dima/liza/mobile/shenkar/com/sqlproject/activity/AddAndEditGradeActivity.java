@@ -36,11 +36,26 @@ public class AddAndEditGradeActivity extends AppCompatActivity {
             }
         }
         else{
-            //todo
+            editTextCourseId.setText(intent.getStringExtra("courseId"));
+            editTextStudentId.setText(intent.getStringExtra("studentId"));
+            editTextGrade.setText(intent.getStringExtra("grade"));
         }
     }
 
-    public void onClickButtonAddGrade(View view) {
+    public void onClickButtonAddOrEditGrade(View view) {
+        /*
+        int flag = 0;
+        switch (view.getId()) {
+            case R.id.buttonAddGrade: {
+                flag = 1;
+                break;
+            }
+            case R.id.buttonEditGrade: {
+                flag = 2;
+                break;
+            }
+        }
+        */
         dataAccess = DataAccess.getInstatnce(this);
         String courseId = editTextCourseId.getText().toString();
         String studentId = editTextStudentId.getText().toString();

@@ -36,12 +36,27 @@ public class AddAndEditStudentActivity extends AppCompatActivity {
             }
         }
         else{
-            //todo
+
+            editTextStudentId.setText(intent.getStringExtra("studentId"));
+            editTextStudentFirsName.setText(intent.getStringExtra("firstName"));
+            editTextStudentLastName.setText(intent.getStringExtra("lastName"));
+            editTextStudentAddress.setText(intent.getStringExtra("address"));
+            editTextDateOfBirthday.setText(intent.getStringExtra("dateOfBirth"));
         }
     }
 
-    public void onClickAddStudent(View view) {
-
+    public void onClickAddOrEditStudent(View view) {
+        int flag = 0;
+        switch (view.getId()){
+            case R.id.buttonAddStudent:{
+                flag = 1;
+                break;
+            }
+            case R.id.buttonEditStudent:{
+                flag = 2;
+                break;
+            }
+        }
         String studentId = editTextStudentId.getText().toString();
         String studentFirstName = editTextStudentFirsName.getText().toString();
         String studentLastName = editTextStudentLastName.getText().toString();
@@ -66,10 +81,12 @@ public class AddAndEditStudentActivity extends AppCompatActivity {
             Toast.makeText(this, "You need to input a student date of birthday", Toast.LENGTH_SHORT).show();
             return;
         }
-        dataAccess = DataAccess.getInstatnce(this);
-        if(dataAccess.getStudentById(studentId)!=null){
-            Toast.makeText(this, "The date base has a student  with this ID.Additions impossible", Toast.LENGTH_SHORT).show();
-            return;
+        if(flag == 1) {
+            dataAccess = DataAccess.getInstatnce(this);
+                  if (dataAccess.getStudentById(studentId) != null) {
+                      Toast.makeText(this, "The date base has a student  with this ID.Additions impossible", Toast.LENGTH_SHORT).show();
+                      return;
+              }
         }
         Intent returnIntent = new Intent();
         returnIntent.putExtra("studentId", studentId);

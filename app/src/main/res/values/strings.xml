@@ -29,4 +29,7 @@
     <string name="editTextCourseLectureId">Course Lecture Id(or empty if no lecture)</string>
     <string name="editCourseButton">Edit Course</string>
     <string name="lectureFirstName">Lecture First Name</string>
+    <string name="buttonAddGrade">Add Grade</string>
+    <string name="buttonEditGrade">Edit Grade</string>
+    <string name="studentIdfield">Student Id</string>
 </resources>
