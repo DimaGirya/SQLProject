@@ -18,10 +18,10 @@ public class Validation {
         }
     }
     public  static boolean gradeValidation(int grade){
-        if(grade >= 100 ){
+        if(grade > 100 ){
             return false;
         }
-        if(grade <= 100){
+        if(grade < 0){
             return  false;
         }
         return true;

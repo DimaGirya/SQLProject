@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import dima.liza.mobile.shenkar.com.sqlproject.MyConstant;
+import dima.liza.mobile.shenkar.com.sqlproject.Validation;
 import dima.liza.mobile.shenkar.com.sqlproject.grade.Grade;
 import dima.liza.mobile.shenkar.com.sqlproject.R;
 import dima.liza.mobile.shenkar.com.sqlproject.SQL.DataAccess;
@@ -28,6 +29,11 @@ import dima.liza.mobile.shenkar.com.sqlproject.grade.StudentGradeAdapter;
 
 public class MainActivity extends AppCompatActivity {
     String TAG  = "MainActivity";
+    String messageErrorStudentId;
+    String messageErrorLectureId;
+    String messageErrorCourseId;
+    String messageErrorGrade;
+    String messageErrorYear;
     ListView listView;
     DataAccess dataAccess;
     EditText editTextStudentId;
@@ -42,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
         editTextStudentId = (EditText) findViewById(R.id.editTextStudentId);
         editTextCourseId = (EditText) findViewById(R.id.editTextCourseId);
         editTextLectureId = (EditText)findViewById(R.id.editTextLectureId) ;
+         messageErrorStudentId =  getResources().getString(R.string.messageErrorStudentId);
+         messageErrorLectureId = getResources().getString(R.string.messageErrorLectureId);
+         messageErrorCourseId =  getResources().getString(R.string.messageErrorCourseId);
+         messageErrorGrade =  getResources().getString(R.string.messageErrorGrade);
+         messageErrorYear =  getResources().getString(R.string.messageErrorYear);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -50,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
             case MyConstant.ConstantEntry.REQUEST_ADD_STUDENT:{
                 if(resultCode== Activity.RESULT_OK){
                     String strStudentId  = data.getStringExtra("studentId");
+                    if(!Validation.intValidation(strStudentId,messageErrorStudentId,this)){
+                        return;
+                    }
                     int studentId  = Integer.parseInt(strStudentId);
                     String studentFirstName =  data.getStringExtra("studentFirstName");
                     String studentLastName =   data.getStringExtra("studentLastName");
@@ -68,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
             case MyConstant.ConstantEntry.REQUEST_ADD_LECTURE:{
                 if(resultCode== Activity.RESULT_OK){
                     String strLectureId  = data.getStringExtra("lectureId");
+                    if(!Validation.intValidation(strLectureId,messageErrorLectureId,this)){
+                        return;
+                    }
                     int lectureId  = Integer.parseInt(strLectureId);
                     String lectureFirstName =  data.getStringExtra("lectureFirstName");
                     String lectureLastName =   data.getStringExtra("lectureLastName");
@@ -85,12 +102,21 @@ public class MainActivity extends AppCompatActivity {
             case MyConstant.ConstantEntry.REQUEST_ADD_COURSE:{
                 if(resultCode== Activity.RESULT_OK){
                     String strCourseId  = data.getStringExtra("courseId");
+                    if(!Validation.intValidation(strCourseId,messageErrorCourseId,this)){
+                        return;
+                    }
                     int courseId  = Integer.parseInt(strCourseId);
                     String courseName  = data.getStringExtra("courseName");
                     String courseSemester  = data.getStringExtra("courseSemester");
                     String strCourseYear  = data.getStringExtra("courseYear");
+                    if(!Validation.intValidation(strCourseYear,messageErrorYear,this)){
+                        return;
+                    }
                     int courseYear  = Integer.parseInt(strCourseYear);
                     String strLectureId  = data.getStringExtra("lectureId");
+                    if(!Validation.intValidation(strCourseId,messageErrorLectureId,this)){
+                        return;
+                    }
                     int lectureId  = Integer.parseInt(strLectureId);
                     Course courseGrade = new Course(courseId,courseName,courseSemester,courseYear,lectureId);
                     if(dataAccess.addCourse(courseGrade)){
@@ -104,12 +130,26 @@ public class MainActivity extends AppCompatActivity {
             }
             case MyConstant.ConstantEntry.REQUEST_ADD_GRADE:{
                 if(resultCode== Activity.RESULT_OK){
-                    String stStudentId  = data.getStringExtra("studentId");
-                    int studentId  = Integer.parseInt(stStudentId);
+                    String strStudentId  = data.getStringExtra("studentId");
+                    if(!Validation.intValidation(strStudentId,messageErrorStudentId,this)){
+                        return;
+                    }
+                    int studentId  = Integer.parseInt(strStudentId);
+
                     String stCourseId  = data.getStringExtra("courseId");
                     int courseId  = Integer.parseInt(stCourseId);
+                    if(!Validation.intValidation(stCourseId,messageErrorCourseId,this)){
+                        return;
+                    }
                     String strGrade  = data.getStringExtra("grade");
+                    if(!Validation.intValidation(strGrade,messageErrorGrade,this)){
+                        return;
+                    }
                     int grade  = Integer.parseInt(strGrade);
+                    if(!Validation.gradeValidation(grade)){
+                        Toast.makeText(this,"Grade must by between 0 to 100.",Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     Grade newGrade = new Grade(studentId,courseId,grade);
                     if(dataAccess.addGrade(newGrade)){
                         Toast.makeText(this,"Grade add to data base.",Toast.LENGTH_LONG).show();
@@ -123,6 +163,9 @@ public class MainActivity extends AppCompatActivity {
             case MyConstant.ConstantEntry.REQUEST_EDIT_LECTURE:{
                 if(resultCode== Activity.RESULT_OK){
                     String strLectureId  = data.getStringExtra("lectureId");
+                    if(!Validation.intValidation(strLectureId,messageErrorLectureId,this)){
+                        return;
+                    }
                     int lectureId  = Integer.parseInt(strLectureId);
                     String lectureFirstName =  data.getStringExtra("lectureFirstName");
                     String lectureLastName =   data.getStringExtra("lectureLastName");
@@ -140,11 +183,23 @@ public class MainActivity extends AppCompatActivity {
             case MyConstant.ConstantEntry.REQUEST_EDIT_COURSE:{
                 if(resultCode== Activity.RESULT_OK){
                     String strCourseId  = data.getStringExtra("courseId");
+                    if(!Validation.intValidation(strCourseId,messageErrorCourseId,this)){
+                        return;
+                    }
                     int courseId  = Integer.parseInt(strCourseId);
+                    if(!Validation.intValidation(strCourseId,messageErrorCourseId,this)){
+                        return;
+                    }
                     String courseName =  data.getStringExtra("courseName");
                     String courseSemester =   data.getStringExtra("courseSemester");
                     String strCourseYear =  data.getStringExtra("courseYear");
-                    String strLectureId =  data.getStringExtra("lectureId");;
+                    String strLectureId =  data.getStringExtra("lectureId");
+                    if(!Validation.intValidation(strCourseYear,messageErrorYear,this)){
+                        return;
+                    }
+                    if(!Validation.intValidation(strLectureId,messageErrorLectureId,this)){
+                        return;
+                    }
                     int courseYear  = Integer.parseInt(strCourseYear);
                     int lectureId  = Integer.parseInt(strLectureId);
                     Course course = new Course(courseId,courseName,courseSemester,courseYear,lectureId);
@@ -161,6 +216,9 @@ public class MainActivity extends AppCompatActivity {
                 if(resultCode== Activity.RESULT_OK){
 
                     String strStudentId  = data.getStringExtra("studentId");
+                    if(!Validation.intValidation(strStudentId,messageErrorStudentId,this)){
+                        return;
+                    }
                     int studentId  = Integer.parseInt(strStudentId);
                     String studentFirstName =  data.getStringExtra("studentFirstName");
                     String studentLastName =   data.getStringExtra("studentLastName");
@@ -178,12 +236,25 @@ public class MainActivity extends AppCompatActivity {
             }
             case MyConstant.ConstantEntry.REQUEST_EDIT_GRADE:{
                 if(resultCode== Activity.RESULT_OK){
-                    String stStudentId  = data.getStringExtra("studentId");
-                    int studentId  = Integer.parseInt(stStudentId);
-                    String stCourseId  = data.getStringExtra("courseId");
-                    int courseId  = Integer.parseInt(stCourseId);
+                    String strStudentId  = data.getStringExtra("studentId");
+                    if(!Validation.intValidation(strStudentId,messageErrorStudentId,this)){
+                        return;
+                    }
+                    int studentId  = Integer.parseInt(strStudentId);
+                    String strCourseId  = data.getStringExtra("courseId");
+                    if(!Validation.intValidation(strCourseId,messageErrorCourseId,this)){
+                        return;
+                    }
+                    int courseId  = Integer.parseInt(strCourseId);
                     String strGrade  = data.getStringExtra("grade");
+                    if(!Validation.intValidation(strGrade,messageErrorGrade,this)){
+                        return;
+                    }
                     int grade  = Integer.parseInt(strGrade);
+                    if(!Validation.gradeValidation(grade)){
+                        Toast.makeText(this,"Grade must by between 0 to 100.",Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     Grade gradeEdit = new Grade(studentId,courseId,grade);
                     if(dataAccess.editGrade(gradeEdit)){
                         Toast.makeText(this,"Grade edit successfully.",Toast.LENGTH_LONG).show();
@@ -230,6 +301,10 @@ public class MainActivity extends AppCompatActivity {
                 String studentId = editTextStudentId.getText().toString();
                 if (studentId.equals("")) {
                     studentId = "NO_STUDENT_ID";
+                }else{
+                    if(!Validation.intValidation(studentId,messageErrorStudentId,this)){
+                        return;
+                    }
                 }
                 intent.putExtra("studentId", studentId);
                 startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_ADD_STUDENT);
@@ -242,14 +317,22 @@ public class MainActivity extends AppCompatActivity {
                 String lectureId = editTextLectureId.getText().toString();
                 if (lectureId.equals("")) {
                     lectureId = "NO_LECTURE_ID";
+                }else{
+                    if(!Validation.intValidation(lectureId,messageErrorLectureId,this)){
+                        return;
+                    }
                 }
                 intent.putExtra("lectureId", lectureId);
                 String courseId = editTextCourseId.getText().toString();
                 if (courseId.equals("")) {
                     courseId = "NO_COURSE_ID";
+                }else{
+                    if(!Validation.intValidation(courseId,messageErrorCourseId,this)){
+                        return;
+                    }
                 }
                 intent.putExtra("courseId",courseId);
-                startActivityForResult(intent,MyConstant.ConstantEntry.REQUEST_ADD_COURSE);
+                startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_ADD_COURSE);
                 break;
             }
             case R.id.buttonAddLecture:{
@@ -259,6 +342,10 @@ public class MainActivity extends AppCompatActivity {
                 String lectureId = editTextLectureId.getText().toString();
                 if (lectureId.equals("")) {
                     lectureId = "NO_LECTURE_ID";
+                }else{
+                    if(!Validation.intValidation(lectureId,messageErrorLectureId,this)){
+                        return;
+                    }
                 }
                 intent.putExtra("lectureId", lectureId);
                 startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_ADD_LECTURE);
@@ -271,11 +358,19 @@ public class MainActivity extends AppCompatActivity {
                 String studentId = editTextStudentId.getText().toString();
                 if (studentId.equals("")) {
                     studentId = "NO_STUDENT_ID";
+                }else{
+                    if(!Validation.intValidation(studentId,messageErrorStudentId,this)){
+                        return;
+                    }
                 }
                 intent.putExtra("studentId", studentId);
                 String courseId = editTextCourseId.getText().toString();
                 if (courseId.equals("")) {
                     courseId = "NO_COURSE_ID";
+                }else{
+                    if(!Validation.intValidation(courseId,messageErrorCourseId,this)){
+                        return;
+                    }
                 }
                 intent.putExtra("courseId", courseId);
                 startActivityForResult(intent, MyConstant.ConstantEntry.REQUEST_ADD_GRADE);
@@ -284,69 +379,69 @@ public class MainActivity extends AppCompatActivity {
             }
             case R.id.buttonRemoveCourse:{
                 Log.i(TAG, "buttonRemoveCourse click");
-                try {
-                    int courseId = Integer.parseInt(editTextCourseId.getText().toString());
+                    String strCourseId = editTextCourseId.getText().toString();
+                    if(!Validation.intValidation(strCourseId,messageErrorCourseId,this)){
+                        return;
+                    }
+                    int courseId = Integer.parseInt(strCourseId);
                     if(dataAccess.removeCourse(courseId)){
                         Toast.makeText(this,"Course remove succeed",Toast.LENGTH_LONG).show();
                     }
                     else{
                         Toast.makeText(this,"Course remove unsuccessful.No such course Id",Toast.LENGTH_LONG).show();
                     }
-                }
-                catch (NumberFormatException e){
-                    Toast.makeText(this,"illegally course id",Toast.LENGTH_LONG).show();
-                }
-
                 break;
             }
             case R.id.buttonRemoveGrade:{
-                try{
-                    int studentId = Integer.parseInt(editTextStudentId.getText().toString());
-                    int courseId = Integer.parseInt(editTextCourseId.getText().toString());
+                   Log.i(TAG, "buttonRemoveGrade click");
+                    String strStudentId = editTextStudentId.getText().toString();
+                    String strCourseId = editTextCourseId.getText().toString();
+                    if(!Validation.intValidation(strStudentId,messageErrorStudentId,this)){
+                        return;
+                    }
+                    if(!Validation.intValidation(strCourseId,messageErrorCourseId,this)){
+                        return;
+                    }
+                    int studentId = Integer.parseInt(strStudentId);
+                    int courseId = Integer.parseInt(strCourseId);
                     if(dataAccess.removeGrade(studentId, courseId)){
                         Toast.makeText(this,"Grade remove succeed",Toast.LENGTH_LONG).show();
                     }
                     else{
                         Toast.makeText(this,"Grade remove unsuccessful.No such grade to remove",Toast.LENGTH_LONG).show();
                     }
-                }
-                catch(NumberFormatException e){
-                    Toast.makeText(this,"illegally student or course id",Toast.LENGTH_LONG).show();
-                }
-                Log.i(TAG, "buttonRemoveGrade click");
+
                 break;
             }
             case R.id.buttonRemoveLecture:{
                 Log.i(TAG, "buttonRemoveLecture click");
-                try {
-                    int lectureId = Integer.parseInt(editTextLectureId.getText().toString());
+                String strLectureId = editTextLectureId.getText().toString();
+                 if(!Validation.intValidation(strLectureId,messageErrorLectureId,this)){
+                    return;
+                  }
+                    int lectureId = Integer.parseInt(strLectureId);
                     if(dataAccess.removeLecture(lectureId)){
                         Toast.makeText(this,"Lecture remove succeed",Toast.LENGTH_LONG).show();
                     }
                     else{
                         Toast.makeText(this,"Lecture remove unsuccessful.No such lecture Id",Toast.LENGTH_LONG).show();
                     }
-                }
-                catch (NumberFormatException e){
-                    Toast.makeText(this,"illegally lecture id",Toast.LENGTH_LONG).show();
-                }
-
                 break;
             }
             case R.id.buttonRemoveStudent:{
                 Log.i(TAG, "buttonRemoveStudent click");
-                try {
-                    int studentId = Integer.parseInt(editTextStudentId.getText().toString());
+                    String strStudentId = editTextStudentId.getText().toString() ;
+                    if(!Validation.intValidation(strStudentId,messageErrorStudentId,this)){
+                        return;
+                    }
+                    int studentId = Integer.parseInt(strStudentId);
                     if(dataAccess.removeStudent(studentId)){
                         Toast.makeText(this,"Student remove succeed",Toast.LENGTH_LONG).show();
                     }
                     else{
                         Toast.makeText(this,"Student remove unsuccessful.No such student Id",Toast.LENGTH_LONG).show();
                     }
-                }
-                catch (NumberFormatException e){
-                    Toast.makeText(this,"illegally student id",Toast.LENGTH_LONG).show();
-                }
+
                 break;
             }
             case R.id.buttonEditGrade:{
@@ -360,9 +455,11 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this,"Id course field is empty",Toast.LENGTH_LONG).show();
                     return;
                 }
+                if(!Validation.intValidation(courseId, messageErrorCourseId, this)){
+                    return;
+                }
                 String studentId = editTextStudentId.getText().toString();
-                if(studentId.equals("")){
-                    Toast.makeText(this,"Id course field is empty",Toast.LENGTH_LONG).show();
+                if(!Validation.intValidation(studentId, messageErrorStudentId, this)){
                     return;
                 }
                 Grade grade = dataAccess.getGradeById(courseId,studentId);
@@ -383,8 +480,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(MyConstant.ConstantEntry.MODE, MyConstant.ConstantEntry.MODE_EDIT);
 
                 String lectureId = editTextLectureId.getText().toString();
-                if(lectureId.equals("")){
-                    Toast.makeText(this,"Id lecture field is empty",Toast.LENGTH_LONG).show();
+                if(!Validation.intValidation(lectureId, messageErrorLectureId, this)){
                     return;
                 }
                 Lecture lecture = dataAccess.getLectureById(lectureId);
@@ -407,8 +503,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 String courseId = editTextCourseId.getText().toString();
-                if(courseId.equals("")){
-                    Toast.makeText(this,"Id course field is empty",Toast.LENGTH_LONG).show();
+                if(!Validation.intValidation(courseId, messageErrorCourseId, this)){
                     return;
                 }
                 Course course = dataAccess.getCourseById(courseId);
@@ -428,11 +523,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.buttonEditStudent:{
                 Log.i(TAG,"buttonEditStudent click");
                 Intent intent = new Intent(this,AddAndEditStudentActivity.class);
-                intent.putExtra(MyConstant.ConstantEntry.MODE,MyConstant.ConstantEntry.MODE_EDIT);
+                intent.putExtra(MyConstant.ConstantEntry.MODE, MyConstant.ConstantEntry.MODE_EDIT);
 
                 String studentId = editTextStudentId.getText().toString();
-                if(studentId.equals("")){
-                    Toast.makeText(this,"Id student field is empty",Toast.LENGTH_LONG).show();
+                if(!Validation.intValidation(studentId, messageErrorStudentId, this)){
                     return;
                 }
                 Student student = dataAccess.getStudentById(studentId);
@@ -454,6 +548,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.buttonShowGradesOfStudent:{
                 Log.i(TAG,"buttonShowGradesOfStudent click");
                 String studentId = editTextStudentId.getText().toString();
+                if(!Validation.intValidation(studentId,messageErrorStudentId,this)){
+                    return;
+                }
                 List<StudentGrade> studentGrade = dataAccess.getStudentGrades(studentId);
                 StudentGradeAdapter studentGradeAdapter = new StudentGradeAdapter(this,studentGrade);
                 listView.setAdapter(studentGradeAdapter);
@@ -462,6 +559,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.buttonTop3Students:{
                 Log.i(TAG,"buttonTop3Students click");
                 String courseId = editTextCourseId.getText().toString();
+                if(!Validation.intValidation(courseId, messageErrorCourseId, this)){
+                    return;
+                }
                 List<StudentGrade> studentGrade = dataAccess.getTopOrBottomStudent(courseId, MyConstant.ConstantEntry.TOP);
                 StudentGradeAdapter studentGradeAdapter = new StudentGradeAdapter(this,studentGrade);
                 listView.setAdapter(studentGradeAdapter);
@@ -470,6 +570,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.buttonBottom3Students:{
                 Log.i(TAG, "buttonBottom3Students click");
                 String courseId = editTextCourseId.getText().toString();
+                if(!Validation.intValidation(courseId, messageErrorCourseId, this)){
+                    return;
+                }
                 List<StudentGrade> studentGrade = dataAccess.getTopOrBottomStudent(courseId, MyConstant.ConstantEntry.BOTTOM);
                 StudentGradeAdapter studentGradeAdapter = new StudentGradeAdapter(this,studentGrade);
                 listView.setAdapter(studentGradeAdapter);

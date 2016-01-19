@@ -32,4 +32,10 @@
     <string name="buttonAddGrade">Add Grade</string>
     <string name="buttonEditGrade">Edit Grade</string>
     <string name="studentIdfield">Student Id</string>
+    <string name="messageErrorStudentId">Student id must by a integer</string>
+    <string name="messageErrorLectureId">Lecture id must by a integer</string>
+    <string name="messageErrorCourseId">Course id must by a integer</string>
+    <string name="messageErrorGrade">Grade must by a integer between 0 to 100</string>
+    <string name="messageErrorYear">Year must by a integer</string>
 </resources>
+
