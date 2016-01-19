@@ -41,15 +41,27 @@ public class DBHelper extends SQLiteOpenHelper {
 
             final String SQL_CREATE_COURSE_TABLE = "CREATE TABLE "
                     + DbContract.CourseEntry.TABLE_NAME + " (" + DbContract.CourseEntry.COLUMN_COURSE_ID + " INTEGER PRIMARY KEY,"
-                    + DbContract.CourseEntry.COLUMN_COURSE_NAME + "," + DbContract.CourseEntry.COLUMN_LECTURE_ID
+                    + DbContract.CourseEntry.COLUMN_COURSE_NAME + "," + DbContract.CourseEntry.COLUMN_LECTURE_ID + " INTEGER"
                     + "," + DbContract.CourseEntry.COLUMN_SEMESTER + "," + DbContract.CourseEntry.COLUMN_YEAR
                     + " INTEGER TEXT NOT NULL)";
 
             final String SQL_CREATE_GRADES_TABLE = "CREATE TABLE "
-                    + DbContract.GradeEntry.TABLE_NAME + " ("+ DbContract.GradeEntry.COLUMN_COURSE_ID  + " INTEGER,"
-                    + DbContract.GradeEntry.COLUMN_STUDENT_ID + " INTEGER," + DbContract.GradeEntry.COLUMN_GRADE
-                    + " INTEGER TEXT NOT NULL)";
+                    + DbContract.GradeEntry.TABLE_NAME + " ("+ DbContract.GradeEntry.COLUMN_COURSE_ID  + " INTEGER NOT NULL,"
+                    + DbContract.GradeEntry.COLUMN_STUDENT_ID + " INTEGER NOT NULL," + DbContract.GradeEntry.COLUMN_GRADE
+                    + " INTEGER NOT NULL,"
+                    + "PRIMARY KEY  (" +DbContract.GradeEntry.COLUMN_COURSE_ID  +","+  DbContract.GradeEntry.COLUMN_STUDENT_ID +") )";
+            /*
 
+
+CREATE TABLE something (
+  column1 INTEGER NOT NULL,
+  column2 INTEGER NOT NULL,
+  value,
+  PRIMARY KEY ( column1, column2)
+);
+
+
+             */
             db.execSQL(SQL_CREATE_LECTURE_TABLE);
             db.execSQL(SQL_CREATE_STUDENT_TABLE);
             db.execSQL(SQL_CREATE_COURSE_TABLE);

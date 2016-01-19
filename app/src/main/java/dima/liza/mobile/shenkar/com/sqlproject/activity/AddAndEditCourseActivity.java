@@ -87,12 +87,11 @@ public class AddAndEditCourseActivity extends AppCompatActivity {
             return;
         }
 
-        if(flag==1) {
+
             if (dataAccess.getLectureById(lectureId) == null) {
                 Toast.makeText(this, "No such lecture in data base", Toast.LENGTH_SHORT).show();
                 return;
             }
-        }
         if (lectureId.equals("")) {
             Toast.makeText(this, "You add/edit course without  lecture", Toast.LENGTH_SHORT).show();
             lectureId = "-1";

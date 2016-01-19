@@ -112,10 +112,10 @@ public class MainActivity extends AppCompatActivity {
                     int grade  = Integer.parseInt(strGrade);
                     Grade newGrade = new Grade(studentId,courseId,grade);
                     if(dataAccess.addGrade(newGrade)){
-                        Toast.makeText(this,"Grade add to data base",Toast.LENGTH_LONG).show();
+                        Toast.makeText(this,"Grade add to data base.",Toast.LENGTH_LONG).show();
                     }
                     else{
-                        Toast.makeText(this,"Grade not add to data base,try again",Toast.LENGTH_LONG).show();
+                        Toast.makeText(this,"This student already have grade in this course.",Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(this,"Lecture edit successfully",Toast.LENGTH_LONG).show();
                     }
                     else{
-                        Toast.makeText(this,"Lecture edit fail.No lecture with such id",Toast.LENGTH_LONG).show();
+                        Toast.makeText(this,"Lecture edit fail.No lecture with such id.",Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(this,"Course edit successfully",Toast.LENGTH_LONG).show();
                     }
                     else{
-                        Toast.makeText(this,"Course edit fail.No course with such id",Toast.LENGTH_LONG).show();
+                        Toast.makeText(this,"Course edit fail.No course with such id.",Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
@@ -168,10 +168,10 @@ public class MainActivity extends AppCompatActivity {
                     String studentDateOfBirthday =   data.getStringExtra("studentDateOfBirthday");
                     Student student = new Student(studentId,studentFirstName,studentLastName,studentAddress,studentDateOfBirthday);
                     if(dataAccess.editStudent(student)){
-                        Toast.makeText(this,"Student edit successfully",Toast.LENGTH_LONG).show();
+                        Toast.makeText(this,"Student edit successfully.",Toast.LENGTH_LONG).show();
                     }
                     else{
-                        Toast.makeText(this,"Student edit fail.No Student with such id",Toast.LENGTH_LONG).show();
+                        Toast.makeText(this,"Student edit fail.No Student with such id.",Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
@@ -186,10 +186,10 @@ public class MainActivity extends AppCompatActivity {
                     int grade  = Integer.parseInt(strGrade);
                     Grade gradeEdit = new Grade(studentId,courseId,grade);
                     if(dataAccess.editGrade(gradeEdit)){
-                        Toast.makeText(this,"Grade edit successfully",Toast.LENGTH_LONG).show();
+                        Toast.makeText(this,"Grade edit successfully.",Toast.LENGTH_LONG).show();
                     }
                     else{
-                        Toast.makeText(this,"Grade edit fail.No such  grade in data base",Toast.LENGTH_LONG).show();
+                        Toast.makeText(this,"Grade edit fail.No such  grade in data base.",Toast.LENGTH_LONG).show();
                     }
                 }
                 break;

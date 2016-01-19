@@ -58,6 +58,10 @@ public class DataAccess implements  iDataAccess {
             Log.i(TAG,"SELECT FROM "+DbContract.StudentEntry.TABLE_NAME + " "
                     + studentColumns[0] + "," + studentColumns[1] + ","
                     + studentColumns[2] + "," + studentColumns[3] +  "," +  studentColumns[4] + ";");
+
+            /*
+            SELECT * FROM Students;
+             */
             Cursor cursor = database.query(DbContract.StudentEntry.TABLE_NAME, studentColumns, null, null, null, null, null);
 
             cursor.moveToFirst();
@@ -99,6 +103,10 @@ public class DataAccess implements  iDataAccess {
             Log.i(TAG,"SELECT FROM "+DbContract.LectureEntry.TABLE_NAME + " "
                     + lectureColumns[0] + "," + lectureColumns[1] + ","
                     + lectureColumns[2] + "," + lectureColumns[3] + ";");
+
+            /*
+            SELECT * FROM Courses;
+             */
             Cursor cursor = database.query(DbContract.CourseEntry.TABLE_NAME, courseColumns, null, null, null, null, null);
 
             cursor.moveToFirst();
@@ -138,6 +146,9 @@ public class DataAccess implements  iDataAccess {
             Log.i(TAG,"SELECT FROM "+DbContract.CourseEntry.TABLE_NAME + " "
                     + courseColumns[0] + "," + courseColumns[1] + ","
                     + courseColumns[2] + "," + courseColumns[3] +  "," +  courseColumns[4] + ";");
+            /*
+            SELECT * FROM Lectures;
+             */
             Cursor cursor = database.query(DbContract.LectureEntry.TABLE_NAME, lectureColumns, null, null, null, null, null);
 
             cursor.moveToFirst();
@@ -304,6 +315,7 @@ public class DataAccess implements  iDataAccess {
         String whereClauseLecture = DbContract.LectureEntry.COLUMN_LECTURE_ID + " = ? ";
         String whereArgs[] = new String[1];
         whereArgs[0] = Integer.toString(lectureId);
+        Log.i(TAG,"Lecture id to delete:"+whereArgs[0]);
         String whereClauseCourse = DbContract.CourseEntry.COLUMN_LECTURE_ID + " = ?";
         ContentValues values = new ContentValues();
         values.put(DbContract.CourseEntry.COLUMN_LECTURE_ID,-1);
@@ -730,11 +742,11 @@ public class DataAccess implements  iDataAccess {
 
     private StudentGrade getStudentGradesFromCursor(Cursor cursor) {
         Log.i(TAG,"Cursor work start");
-        int studentId = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Grades.StudentId"))); // Exception!!!
-        String firstName = cursor.getString(cursor.getColumnIndex("Students.FirstName"));
-        String lastName = cursor.getString(cursor.getColumnIndex("Students.LastName"));
-        String courseName = cursor.getString(cursor.getColumnIndex("Courses.CourseName"));
-        int grades = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Grades.Grade"))); // Exception!!!
+        int studentId = Integer.parseInt(cursor.getString(cursor.getColumnIndex("StudentId"))); // Exception!!!
+        String firstName = cursor.getString(cursor.getColumnIndex("FirstName"));
+        String lastName = cursor.getString(cursor.getColumnIndex("LastName"));
+        String courseName = cursor.getString(cursor.getColumnIndex("CourseName"));
+        int grades = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Grade"))); // Exception!!!
         StudentGrade studentGrade = new StudentGrade(lastName,firstName,studentId ,courseName,grades);
         Log.i(TAG,"Cursor work end");
         return studentGrade;
