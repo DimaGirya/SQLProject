@@ -39,7 +39,7 @@ public class DataAccess implements  iDataAccess {
             dbHelper = new DBHelper(this.context);
         }
         catch (Exception e){
-            Log.d(TAG, "Error in DataAccess:", e);
+            Log.d(TAG, "Exception:", e);
         }
     }
 
@@ -74,7 +74,7 @@ public class DataAccess implements  iDataAccess {
             return studentList;
         }
         catch (Exception  e){
-            Log.d(TAG, "Error,Exception:",e);
+            Log.d(TAG, "Exception:",e);
         }
         finally {
             if (database != null) {
@@ -119,7 +119,7 @@ public class DataAccess implements  iDataAccess {
             return courseList;
         }
         catch (Exception  e){
-            Log.d(TAG, "Error,Exception:", e);
+            Log.d(TAG, "Exception:", e);
         }
         finally {
             if (database != null) {
@@ -161,7 +161,7 @@ public class DataAccess implements  iDataAccess {
             return lectureList;
         }
         catch (Exception  e){
-            Log.d(TAG, "Error,Exception:", e);
+            Log.d(TAG, "Exception:", e);
         }
         finally {
             if (database != null) {
@@ -199,7 +199,7 @@ public class DataAccess implements  iDataAccess {
                 return true;
             }
         } catch (Exception e) {
-            Log.e(TAG, "Exception!", e);
+            Log.e(TAG, "Exception:", e);
             return false;
         } finally {
             if (database != null) {
@@ -224,7 +224,7 @@ public class DataAccess implements  iDataAccess {
                 return true;
             }
         } catch (Exception e) {
-            Log.e(TAG, "Exception!", e);
+            Log.e(TAG, "Exception:", e);
             return false;
         } finally {
             if (database != null) {
@@ -250,7 +250,7 @@ public class DataAccess implements  iDataAccess {
                 return true;
             }
         } catch (Exception e) {
-            Log.e(TAG,"Exception!",e);
+            Log.e(TAG,"Exception:",e);
             return false;
         } finally {
             if (database != null) {
@@ -274,7 +274,7 @@ public class DataAccess implements  iDataAccess {
                 return true;
             }
         } catch (Exception e) {
-            Log.e(TAG, "Exception!", e);
+            Log.e(TAG, "Exception:", e);
             return false;
         } finally {
             if (database != null) {
@@ -301,7 +301,7 @@ public class DataAccess implements  iDataAccess {
             return true;
         }
         catch(Exception e){
-            Log.e(TAG,"Exception!",e);
+            Log.e(TAG,"Exception:",e);
             return false;
         }
         finally {
@@ -329,7 +329,7 @@ public class DataAccess implements  iDataAccess {
             return true;
         }
         catch(Exception e){
-            Log.e(TAG, "Exception!", e);
+            Log.e(TAG, "Exception:", e);
             return false;
         }
         finally {
@@ -355,7 +355,7 @@ public class DataAccess implements  iDataAccess {
             return true;
         }
         catch(Exception e){
-            Log.e(TAG, "Exception!", e);
+            Log.e(TAG, "Exception:", e);
             return false;
         }
         finally {
@@ -378,7 +378,7 @@ public class DataAccess implements  iDataAccess {
             return true;
         }
         catch(Exception e){
-            Log.e(TAG,"Exception!",e);
+            Log.e(TAG,"Exception:",e);
             return false;
         }
     }
@@ -402,16 +402,14 @@ public class DataAccess implements  iDataAccess {
             Cursor cursor =  database.rawQuery(sqlJoin,selectionArgs);
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                Log.i(TAG,"cursor work 1");
                 StudentGrade studentGrade = getStudentGradesFromCursor(cursor);
-                Log.i(TAG,"cursor work 2");
                 studentGrades.add(studentGrade);
                 cursor.moveToNext();
             }
             cursor.close();
             return studentGrades;
         } catch (Exception e) {
-            Log.d(TAG, "Error,Exception:", e);
+            Log.d(TAG, "Exception:", e);
         }
         finally {
             if (database != null) {
@@ -437,13 +435,13 @@ public class DataAccess implements  iDataAccess {
             cursor.moveToFirst();
             Log.d(TAG, " cursor.getCount():" + cursor.getCount());
             if(cursor.getCount()!=1){
-                Log.d(TAG, "Error!! more than 1 course with id or no such course:"+courseId + " cursor.getCount():"+cursor.getCount());
+                Log.d(TAG, "More than 1 course with id or no such course:"+courseId + " cursor.getCount():"+cursor.getCount());
                 return null;
             }
             Course course = getCurseFromCursor(cursor);
             return course;
         } catch (Exception e) {
-            Log.d(TAG, "Error,Exception:", e);
+            Log.d(TAG, "Exception:", e);
         }
         finally {
             if (database != null) {
@@ -468,13 +466,13 @@ public class DataAccess implements  iDataAccess {
             Cursor cursor =  database.rawQuery(sqlSelect,selectionArgs);
             cursor.moveToFirst();
             if(cursor.getCount()!=1){
-                Log.d(TAG, "Error!! more than 1 course with id or no such course:"+studentId + " cursor.getCount():"+cursor.getCount());
+                Log.d(TAG, "More than 1 course with id or no such course:"+studentId + " cursor.getCount():"+cursor.getCount());
                 return null;
             }
             Student student = getStudentFromCursor(cursor);
             return student;
         } catch (Exception e) {
-            Log.d(TAG, "Error,Exception:", e);
+            Log.d(TAG, "Exception:", e);
         }
         finally {
             if (database != null) {
@@ -499,14 +497,14 @@ public class DataAccess implements  iDataAccess {
             Cursor cursor =  database.rawQuery(sqlSelect,selectionArgs);
             cursor.moveToFirst();
             if(cursor.getCount()!=1){
-                Log.d(TAG, "Error!! more than 1 course with id or no such course:"+lectureId + " cursor.getCount():"+cursor.getCount());
+                Log.d(TAG, "More than 1 course with id or no such course:"+lectureId + " cursor.getCount():"+cursor.getCount());
                 return null;
             }
             Lecture lecture = getLectureFromCursor(cursor);
             return lecture;
         }
         catch (Exception  e){
-            Log.d(TAG, "Error,Exception:", e);
+            Log.d(TAG, "Exception:", e);
         }
         finally {
             if (database != null) {
@@ -532,14 +530,14 @@ public class DataAccess implements  iDataAccess {
             Cursor cursor =  database.rawQuery(sqlSelect,selectionArgs);
             cursor.moveToFirst();
             if(cursor.getCount()!=1){
-                Log.d(TAG, "Error!! more than 1 grade  with id or no such course:"+courseId + "student:" + studentId
+                Log.d(TAG, "More than 1 grade  with id or no such course:"+courseId + "student:" + studentId
                         + " cursor.getCount():"+cursor.getCount());
                 return null;
             }
             Grade grade = getGradeFromCursor(cursor);
             return grade;
         } catch (Exception e) {
-            Log.d(TAG, "Error,Exception:", e);
+            Log.d(TAG, "Exception:", e);
         }
         finally {
             if (database != null) {
@@ -581,7 +579,7 @@ public class DataAccess implements  iDataAccess {
             return true;
         }
         catch(Exception e){
-            Log.e(TAG, "Exception!", e);
+            Log.e(TAG, "Exception:", e);
             return false;
         }
         finally {
@@ -617,7 +615,7 @@ public class DataAccess implements  iDataAccess {
             return true;
         }
         catch(Exception e){
-            Log.e(TAG,"Exception!",e);
+            Log.e(TAG,"Exception:",e);
             return false;
         }
         finally {
@@ -652,7 +650,7 @@ public class DataAccess implements  iDataAccess {
             return true;
         }
         catch(Exception e){
-            Log.e(TAG,"Exception!",e);
+            Log.e(TAG,"Exception:",e);
             return false;
         }
         finally {
@@ -684,7 +682,7 @@ public class DataAccess implements  iDataAccess {
             return true;
         }
         catch(Exception e){
-            Log.e(TAG,"Exception!",e);
+            Log.e(TAG,"Exception:",e);
             return false;
         }
         finally {
@@ -729,7 +727,7 @@ public class DataAccess implements  iDataAccess {
             cursor.close();
             return studentGrades;
         } catch (Exception e) {
-            Log.d(TAG, "Error,Exception:", e);
+            Log.d(TAG, "Exception:", e);
         }
         finally {
             if (database != null) {
