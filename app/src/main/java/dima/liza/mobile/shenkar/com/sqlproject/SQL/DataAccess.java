@@ -49,9 +49,9 @@ public class DataAccess implements  iDataAccess {
         return instance;
     }
 
+
     @Override
     public List<Student> getAllStudents() {
-
         try {
             database = dbHelper.getReadableDatabase();
             List<Student> studentList = new ArrayList<Student>();
@@ -192,6 +192,8 @@ public class DataAccess implements  iDataAccess {
         content.put(DbContract.StudentEntry.COLUMN_DATE_OF_BIRTH, student.getDateOfBirth());
         try {
             database = dbHelper.getReadableDatabase();
+            /* INSERT INTO Students(StudentId, LastName, FirstName, Address, DateOfBirth)
+	            VALUES ('101','Liza','Gilman','zahal kiryat ono', '22-10-91'); EXAMPLE */
             if(database.insert(DbContract.StudentEntry.TABLE_NAME,null,content)==-1){
                 return false;
             }
@@ -217,6 +219,8 @@ public class DataAccess implements  iDataAccess {
         content.put(DbContract.LectureEntry.COLUMN_ADDRESS, lecture.getAddress());
         try {
             database = dbHelper.getReadableDatabase();
+            /*  INSERT INTO lecturers(LectureId, LastName, FirstName, Address)
+	            VALUES ('1001','Yigal','Hoffner','bialik ramat-gan'); EXAMPLE  */
             if(database.insert(DbContract.LectureEntry.TABLE_NAME,null,content)==-1){
                 return false;
             }
@@ -243,6 +247,8 @@ public class DataAccess implements  iDataAccess {
         content.put(DbContract.CourseEntry.COLUMN_LECTURE_ID, course.getLectureId());
         try {
             database = dbHelper.getReadableDatabase();
+            /*  INSERT INTO Courses(CourseId, CourseName, Semester, Year, LecturerId)
+	            VALUES ('10001','Assembly','A','2015','1001'); EXAMPLE  */
             if(database.insert(DbContract.CourseEntry.TABLE_NAME,null,content)==-1){
                 return false;
             }
@@ -266,6 +272,8 @@ public class DataAccess implements  iDataAccess {
         content.put(DbContract.GradeEntry.COLUMN_STUDENT_ID, grade.getStudentId());
         content.put(DbContract.GradeEntry.COLUMN_GRADE, grade.getGrade());
         try {
+            /*  INSERT INTO Courses(CourseId, StudentId, Grade)
+	            VALUES ('10001','101', '98'); EXAMPLE  */
             database = dbHelper.getReadableDatabase();
             if(database.insert(DbContract.GradeEntry.TABLE_NAME,null,content)==-1){
                 return false;
@@ -293,9 +301,11 @@ public class DataAccess implements  iDataAccess {
 
         database.beginTransaction();
         try {
+            /* DELETE FROM Students WHERE StudentId= '101' ; EXAMPLE*/
             if(database.delete(DbContract.StudentEntry.TABLE_NAME,whereClauseStudent,whereArgs)!=1){
                 return false;
             }
+            /* DELETE FROM Grades WHERE StudentId= '101' ; EXAMPLE*/
             database.delete(DbContract.GradeEntry.TABLE_NAME,whereClauseGrade,whereArgs);
             database.setTransactionSuccessful();
             return true;
@@ -321,9 +331,12 @@ public class DataAccess implements  iDataAccess {
         values.put(DbContract.CourseEntry.COLUMN_LECTURE_ID,-1);
         database.beginTransaction();
         try {
+            /* DELETE FROM Lecturers WHERE LecturerId= '1001' ; EXAMPLE*/
             if(database.delete(DbContract.LectureEntry.TABLE_NAME,whereClauseLecture,whereArgs)!=1){
                 return false;
             }
+            /* UPDATE Courses SET LecturerId= -1 WHERE LecturerId='1002'; EXAMPLE | change the ids of the lecturer's
+                                                                                    courses to -1                  */
             database.update(DbContract.CourseEntry.TABLE_NAME, values, whereClauseCourse, whereArgs);
             database.setTransactionSuccessful();
             return true;
@@ -347,9 +360,11 @@ public class DataAccess implements  iDataAccess {
 
         database.beginTransaction();
         try {
+            /* DELETE FROM Courses WHERE CourseId= '1001' ; EXAMPLE*/
             if(database.delete(DbContract.CourseEntry.TABLE_NAME, whereClauseCourse, whereArgs)!=1){
                 return false;
             }
+            /* DELETE FROM Grades WHERE CourseId= '1001' ; EXAMPLE*/
             database.delete(DbContract.GradeEntry.TABLE_NAME,whereClauseStudent,whereArgs);
             database.setTransactionSuccessful();
             return true;
@@ -372,6 +387,7 @@ public class DataAccess implements  iDataAccess {
         whereArgs[0] = Integer.toString(studentId);
         whereArgs[1] = Integer.toString(courseId);
         try {
+            /* DELETE FROM Grades WHERE CourseId= '1001' AND StudentId = '101' ; EXAMPLE*/
             if(database.delete(DbContract.GradeEntry.TABLE_NAME,whereClauseGrade,whereArgs)!=1){
                 return false;
             }
@@ -423,6 +439,7 @@ public class DataAccess implements  iDataAccess {
     public Course getCourseById(String courseId) {
         try {
             database = dbHelper.getReadableDatabase();
+            /* SELECT * FROM Courses WHERE CourseId= '1001' ; EXAMPLE*/
             String sqlSelect = "SELECT " + DbContract.CourseEntry.COLUMN_COURSE_ID + ","
                     + DbContract.CourseEntry.COLUMN_COURSE_NAME + "," + DbContract.CourseEntry.COLUMN_LECTURE_ID
                     + "," + DbContract.CourseEntry.COLUMN_SEMESTER + "," + DbContract.CourseEntry.COLUMN_YEAR
@@ -455,6 +472,7 @@ public class DataAccess implements  iDataAccess {
     public Student getStudentById(String studentId) {
         try {
             database = dbHelper.getReadableDatabase();
+            /* SELECT * FROM Students WHERE StudentId= '107' ; EXAMPLE*/
             String sqlSelect = "SELECT " + DbContract.StudentEntry.COLUMN_STUDENT_ID  + ","
                     + DbContract.StudentEntry.COLUMN_FIRST_NAME + "," + DbContract.StudentEntry.COLUMN_LAST_NAME
                     + "," + DbContract.StudentEntry.COLUMN_ADDRESS + "," + DbContract.StudentEntry.COLUMN_DATE_OF_BIRTH
@@ -486,6 +504,7 @@ public class DataAccess implements  iDataAccess {
     public Lecture getLectureById(String lectureId) {
         try {
             database = dbHelper.getReadableDatabase();
+            /* SELECT * FROM Lecturers WHERE LecturerId= '1001' ; EXAMPLE*/
             String sqlSelect = "SELECT " + DbContract.LectureEntry.COLUMN_LECTURE_ID  + ","
                     + DbContract.LectureEntry.COLUMN_LAST_NAME + "," + DbContract.LectureEntry.COLUMN_FIRST_NAME
                     + "," + DbContract.LectureEntry.COLUMN_ADDRESS
@@ -517,6 +536,7 @@ public class DataAccess implements  iDataAccess {
     @Override
     public Grade getGradeById(String courseId, String studentId) {
         try {
+             /* SELECT * FROM Grades WHERE CourseId= '1001' AND StudentId = '105' ; EXAMPLE*/
             database = dbHelper.getReadableDatabase();
             String sqlSelect = "SELECT " + DbContract.GradeEntry.COLUMN_STUDENT_ID  + ","
                     +  DbContract.GradeEntry.COLUMN_COURSE_ID + "," + DbContract.GradeEntry.COLUMN_GRADE
@@ -572,6 +592,8 @@ public class DataAccess implements  iDataAccess {
         database = dbHelper.getReadableDatabase();
         database.beginTransaction();
         try {
+            /* UPDATE Lecturers SET FirstName = 'marselo', LastName = 'shichman', Address = 'hertzel tal aviv'
+             WHERE LecturerId='1002'; EXAMPLE  */
             if(database.update(DbContract.LectureEntry.TABLE_NAME, values, whereClauseLecture, whereArgs)!=1){
                 return false;
             }
@@ -608,6 +630,8 @@ public class DataAccess implements  iDataAccess {
                     + DbContract.StudentEntry.COLUMN_DATE_OF_BIRTH + "=" + student.getDateOfBirth() + ","
                     + DbContract.StudentEntry.COLUMN_ADDRESS + "=" + student.getAddress() + " "
                     + " WHERE " + DbContract.StudentEntry.COLUMN_STUDENT_ID + " = " + whereArgs[0] + ";");
+            /* UPDATE Students SET FirstName = 'dima', LastName = 'Girya', Address = 'hertael kfar shmarihau', DateOfBirth="14/01/1990"
+             WHERE StudentId='102'; EXAMPLE  */
             if (database.update(DbContract.StudentEntry.TABLE_NAME, values, whereClauseLecture, whereArgs) != 1) {
                 return false;
             }
@@ -643,6 +667,7 @@ public class DataAccess implements  iDataAccess {
                     + DbContract.CourseEntry.COLUMN_SEMESTER + "=" + course.getSemester() + ","
                     + DbContract.CourseEntry.COLUMN_LECTURE_ID + "=" + course.getLectureId() + ","
                     + " WHERE " + DbContract.CourseEntry.COLUMN_COURSE_ID + " = " +   whereArgs[0]+ ";");
+            /* UPDATE Courses SET  CourseName = 'Android' ... WHERE CourseId='10002'; EXAMPLE  */
             if(database.update(DbContract.CourseEntry.TABLE_NAME,values,whereClauseLecture,whereArgs)!=1){
                 return false;
             }
@@ -675,6 +700,7 @@ public class DataAccess implements  iDataAccess {
                     + DbContract.GradeEntry.COLUMN_GRADE + "=" + grade.getGrade() + ","
                     + " WHERE " + DbContract.GradeEntry.COLUMN_COURSE_ID + " = " +   whereArgs[0]
                     +  " AND " + DbContract.GradeEntry.COLUMN_STUDENT_ID +  whereArgs[1] + ";");
+            /* UPDATE Grade SET Grade = '90' WHERE CourseId='10002' AND StudentId = '102'; EXAMPLE  */
             if(database.update(DbContract.GradeEntry.TABLE_NAME,values,whereClause,whereArgs)!=1){
                 return false;
             }
@@ -739,14 +765,12 @@ public class DataAccess implements  iDataAccess {
 
 
     private StudentGrade getStudentGradesFromCursor(Cursor cursor) {
-        Log.i(TAG,"Cursor work start");
-        int studentId = Integer.parseInt(cursor.getString(cursor.getColumnIndex("StudentId"))); // Exception!!!
+        int studentId = Integer.parseInt(cursor.getString(cursor.getColumnIndex("StudentId")));
         String firstName = cursor.getString(cursor.getColumnIndex("FirstName"));
         String lastName = cursor.getString(cursor.getColumnIndex("LastName"));
         String courseName = cursor.getString(cursor.getColumnIndex("CourseName"));
-        int grades = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Grade"))); // Exception!!!
+        int grades = Integer.parseInt(cursor.getString(cursor.getColumnIndex("Grade")));
         StudentGrade studentGrade = new StudentGrade(lastName,firstName,studentId ,courseName,grades);
-        Log.i(TAG,"Cursor work end");
         return studentGrade;
     }
 }
