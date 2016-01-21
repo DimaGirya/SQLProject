@@ -70,7 +70,8 @@ public class DbContract {
             (
                     StudentId int,
                     CourseId int,
-                    Grade int
+                    Grade int,
+                    PRIMARY KEY(StudentId,CourseId)
             );
 */
     public  static final class GradeEntry {

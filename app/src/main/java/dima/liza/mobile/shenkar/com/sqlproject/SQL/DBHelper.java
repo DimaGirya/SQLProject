@@ -50,18 +50,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     + DbContract.GradeEntry.COLUMN_STUDENT_ID + " INTEGER NOT NULL," + DbContract.GradeEntry.COLUMN_GRADE
                     + " INTEGER NOT NULL,"
                     + "PRIMARY KEY  (" +DbContract.GradeEntry.COLUMN_COURSE_ID  +","+  DbContract.GradeEntry.COLUMN_STUDENT_ID +") )";
-            /*
 
-
-CREATE TABLE something (
-  column1 INTEGER NOT NULL,
-  column2 INTEGER NOT NULL,
-  value,
-  PRIMARY KEY ( column1, column2)
-);
-
-
-             */
             db.execSQL(SQL_CREATE_LECTURE_TABLE);
             db.execSQL(SQL_CREATE_STUDENT_TABLE);
             db.execSQL(SQL_CREATE_COURSE_TABLE);
